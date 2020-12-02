@@ -9,7 +9,7 @@ Stylesheet for the MDPLS web client.
 body{
     height: 100%;
     background-size: cover;
-    background: linear-gradient(#d1c59e, #b6a368) no-repeat;
+    background: linear-gradient(#d1c59e, #b6a368);
 }
 
 .head{

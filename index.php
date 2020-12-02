@@ -12,7 +12,7 @@ Basic prototype page for the MDLPS-->
 </head>
 <body>
     <!-- Load header file -->
-    <?php require_once('./header.php'); ?>
+    <?php require_once('./header.html'); ?>
 
     <!-- Container div for entirety of package logging -->
     <div class="log">
