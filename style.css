@@ -1,0 +1,52 @@
+/*
+Hunter DeBlase
+Mail Delivery Logging and Processing System
+Creation Date: 11/30/2020
+Last Modified: 12/2/2020
+style.css
+Stylesheet for the MDPLS web client.
+*/
+body{
+    height: 100%;
+    background-size: cover;
+    background: linear-gradient(#d1c59e, #b6a368) no-repeat;
+}
+
+.head{
+    height: 6.5%;
+    display: flex;
+    background-color: #701932;
+    text-align: center;
+}
+
+.head > div{
+    border: 1px solid black;
+    display: inline-block;
+    flex: 1;
+    align-items: center;
+}
+
+h3, h2{
+    color: white;
+}
+
+.log{
+    width=50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.loghead{
+    width: 33%;
+    height: 5em;
+    line-height: 5em;
+    margin: 10em auto .5em auto;
+    background-color: #701932;
+    text-align: center;
+}
+
+input, select{
+    display: block;
+    width=50%;
+    margin: 5 auto;
+}
