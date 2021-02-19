@@ -1,9 +1,9 @@
 <!-- Hunter DeBlase
 Mail Delivery Logging and Processing System
 Creation Date: 11/30/2020
-Last Modified: 12/2/2020
+Last Modified: 2/18/2021
 index.php
-Basic prototype page for the MDLPS-->
+MDLPS main page-->
 <html>
 <head>
     <meta charset="utf-8">
@@ -28,12 +28,20 @@ Basic prototype page for the MDLPS-->
                 <input type="text" name="nameFirst" placeholder="First Name" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <select name="building" placeholder="Building ID">
-                    <option selected="selected">Building 1</option>
+                    <option>Building 1</option>
                     <option>Building 2</option>
                     <option>Building 3</option>
                     <option>Building 4</option>
-                </select>
-                <input type="submit" value="Submit">
+		</select>
+		<input class="line" type="text" name="roomNum" placeholder="Room Number" maxLength="4" size="6" required>
+		<select class="line" name="bedLetter" placeholder="Bed Letter">
+			<option>Bed A</option>
+			<option>Bed B</option>
+			<option>Bed C</option>
+			<option>Bed D</option>
+			<option>Bed E</option>
+		<input type="submit" value="Submit">
+		<input class="line" type="reset" value="Clear Form">
             </form>
         </div>
     </div>
