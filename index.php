@@ -22,7 +22,7 @@ MDLPS main page-->
         </div>
         <!-- Container for styling forms -->
         <div class="forms">
-            <form method="post" action="print.php">
+            <form method="post" action="logpackage.php">
                 <input type="text" name="trackingID" placeholder="Tracking Number" required autofocus>
                 <input type="text" name="nameLast" placeholder="Last Name" required>
                 <input type="text" name="nameFirst" placeholder="First Name" required>
