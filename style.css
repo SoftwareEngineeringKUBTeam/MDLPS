@@ -76,3 +76,15 @@ input{
 .line{
     display: inline;
 }
+
+.results {
+    border-radius: 5px / 5px;
+    display: block;
+    padding: 1em;
+    background-color: #701932;
+    height: 100%;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
