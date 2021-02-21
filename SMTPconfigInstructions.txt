@@ -1,0 +1,31 @@
+Steps to configure php and sendmail so the mail function works when using xampp:
+
+go to the directory where xampp is installed, if you do not have a sendmail directory here you will need to download fake sendmail for windows or when installing xampp make sure that box is selected for packages to install.
+
+in the sendmail directory find sendmail.ini or the sendmail configurations file and open it with a text editor.
+
+find these lines and change them to match these specs:
+
+smtp_server=smtp.gmail.com
+smtp_port=465
+smtp_ssl=ssl
+
+then for auth_username and auth_password use the email address and password for our testMDLPS.
+this email is configured for SMTP so outgoing emails will come from this account.
+now you save this file and exit. 
+
+now go back to the main xampp directory and go into the php directory. find the php.ini file or php config file and use the find function and type sendmail. it will be around line 1092 under [mail function]
+
+comment the two lines:
+
+;SMTP=localhost
+;smtp_port=25
+
+then make sure you have sendmail_from and sendmail_path uncommented and look like this:
+
+sendmail_from = testMDLPS@gmail.com
+sendmail_path = "C:\xampp\sendmail\sendmail.exe -t"
+
+if your installation location for xampp is different, make sure you change the path but keep 
+\sendmail\sendmail.exe -t
+then you can save this file and should be good to go.

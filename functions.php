@@ -1,4 +1,9 @@
 <?php
+/*********************************    CHANGES   *********************************
+    -20FEB2021 Nick Naylor: added notifyStudent function to send an email to the
+                            student's email address
+
+*********************************************************************************/
 
 
 
@@ -28,5 +33,48 @@ function printTable($data) {
     }
     print "</table>";
 }
+
+
+/*
+    Function Name:  notifyStudent
+    Author:         Nick Naylor
+    Description:    This function is called in logpackage.php and uses the PHP
+                    mail function to send an email to the student's email address
+                    with the tracking number.
+    Parameters:     string $email - the student's email address 
+                    string $trackID - the package's tracking number
+                    string $name - the students first name
+    Returns:        True if mail sent, False if mail did not send
+    Considerations: For the PHP mail function to work you must have your server
+                    configured for using SMTP
+*/
+function notifyStudent($email, $trackID, $name) {
+    // define the subject
+    $subject = 'You have a package ready for pickup!';
+
+    // define the message
+    $message = "
+    <html>     
+    <body>
+        <div id=\"email\" style='background: #701932;color: white; height: 100% auto;'>
+            <div id=\"welcome\" style='background: #b6a368; color: black; height: 2em auto; text-align: center; display: block;'>
+                <h2>This message was sent by the Mail Delivery Logging and Processing System</h2>
+            </div>
+            <div id=\"text\" style='background: #701932; color: white; margin: 3em; padding-bottom: 3em; line-height: 3em auto;'>
+                <h2>{$name},</h2>
+                <p>You have a package with tracking number {$trackID} ready for pickup!</p>
+            </div>
+            
+        </div>
+    </body>
+    </html>";    
+
+    // define headers
+    $headers = "From: DO NOT REPLY <testMDLPS@gmail.com>\r\n";
+    $headers .= "Content-type: text/html; charset=utf-8\r\n";
+
+    // send the message
+    return mail($email, $subject, $message, $headers);
+} // END notifyStudent 
 
 ?>

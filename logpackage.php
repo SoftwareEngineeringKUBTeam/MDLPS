@@ -1,12 +1,13 @@
 <!-- Shane Flynn
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 2/19/2021
+Last Modified: 2/20/2021 - implemented notifyStudent from functions.php
 logpackage.php -->
 
 <?php require_once('./header.html'); ?>
 <?php
 
+require_once("functions.php"); // used to access notifyStudent function
 /*
 Array
 (
@@ -45,14 +46,21 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   
   $stmt->execute();
 
-  echo "New records created successfully";
+  echo "New records created successfully. ";
 } catch(PDOException $e) {
   echo "Error: " . $e->getMessage();
 }
 $conn = null;
 $email = $_POST['email'];
 $trackingID = $_POST['trackingID'];
-echo "<form action='print.php'method='post' id = 'auto'> <input type = 'hidden' name = 'email' value = '{$email}'> <input type = 'hidden' name = 'trackingID' value = '{$trackingID}'> <input type = 'submit'></form>";
+
+//echo "<form action='print.php'method='post' id = 'auto'> <input type = 'hidden' name = 'email' value = '{$email}'> <input type = 'hidden' name = 'trackingID' value = '{$trackingID}'> <input type = 'submit'></form>";
+
+$sName = $_POST['nameFirst'];
+// call notifyStudent. pass the email and tracking id to be sent in the email
+echo (notifyStudent($email, $trackingID, $sName)) ? " Notification sent" : " Error sending email.";
+
+
 
 ?>
 
