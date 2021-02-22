@@ -1,7 +1,7 @@
 <!-- Hunter DeBlase
 Mail Delivery Logging and Processing System
 Creation Date: 11/30/2020
-Last Modified: 2/18/2021
+Last Modified: 2/22/2021 - commented out email form for testing, changed bed letter scheme
 index.php
 MDLPS main page-->
 <html>
@@ -26,7 +26,7 @@ MDLPS main page-->
                 <input type="text" name="trackingID" placeholder="Tracking Number" required autofocus>
                 <input type="text" name="nameLast" placeholder="Last Name" required>
                 <input type="text" name="nameFirst" placeholder="First Name" required>
-                <input type="email" name="email" placeholder="Email" required>
+                <!--<input type="email" name="email" placeholder="Email" required> -->
                 <select name="building" placeholder="Building ID">
                     <option>Building 1</option>
                     <option>Building 2</option>
@@ -35,11 +35,15 @@ MDLPS main page-->
 		</select>
 		<input class="line" type="text" name="roomNum" placeholder="Room Number" maxLength="4" size="6" required>
 		<select class="line" name="bedLetter" placeholder="Bed Letter">
-			<option>Bed A</option>
-			<option>Bed B</option>
-			<option>Bed C</option>
-			<option>Bed D</option>
-			<option>Bed E</option>
+			<option>A</option>
+			<option>B</option>
+			<option>C</option>
+			<option>D</option>
+			<option>E</option>
+			<!--
+			Bed letters need to be single characters to be searched in the database
+			otherwise, "Bed A" does not correspond with column bed_letter "A"
+			-->
 		<input type="submit" value="Submit">
 		<input class="line" type="reset" value="Clear Form">
             </form>
