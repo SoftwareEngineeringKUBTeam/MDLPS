@@ -1,28 +1,16 @@
 <!-- Shane Flynn
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 2/20/2021 - implemented notifyStudent from functions.php
+Last Modified: 2/22/2021 - implemented notifyStudent from functions.php
 logpackage.php -->
 
-<?php require_once('./header.html'); ?>
 <?php
 
 require_once("functions.php"); // used to access notifyStudent function
-/*
-Array
-(
-    [trackingID] => TNUM
-    [nameLast] => TLNAME
-    [nameFirst] => TFNAME
-    [email] => T@T.com
-    [building] => Building 1
-    [roomNum] => 8888
-    [bedLetter] => Bed A
-)*/
 
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "MDLPS";
+$password = "csc355_testEmail";
 $dbname = "test";
 $email = "";
 if (!isset ($_POST['trackingID']))
@@ -106,11 +94,9 @@ $trackingID = $_POST['trackingID'];
 $sName = $_POST['nameFirst'];
 // call notifyStudent. pass the email and tracking id to be sent in the email
 echo (notifyStudent($email, $trackingID, $sName)) ? " Notification sent" : " Error sending email.";
-
+header("refresh:10;url=index.php");
 ?>
 
 <script type="text/javascript">
     document.getElementById('auto').submit();
 </script>
-<!--STUDENT (SID, name_first, name_last, email, building, room_num, bed_letter)
-PACKAGE (ID, building, log_date, name_first, name_last, tracking_ID, sign_date, 2FA) -->

@@ -8,7 +8,7 @@ MDLPS main page-->
 <head>
     <meta charset="utf-8">
     <title>Package Delivery Processing</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel='stylesheet' type='text/css' href='style.css'>
 </head>
 <body>
     <!-- Load header file -->

@@ -8,7 +8,7 @@ MDLPS main page-->
 <head>
     <meta charset="utf-8">
     <title>Package Search</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel='stylesheet' type='text/css' href='style.css'>
 
     <!-- Page-specific styling. We could just put this all in style.css but idk if it'll conflict with anything -->
     <style>
@@ -49,8 +49,8 @@ MDLPS main page-->
 
 //Database Connection Parameters
 $servername = "localhost";
-$username = "pma";
-$password = "";
+$username = "MDLPS";
+$password = "csc355_testEmail";
 $dbname = "test";
 
 
