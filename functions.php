@@ -48,7 +48,7 @@ function printTable($data) {
     Considerations: For the PHP mail function to work you must have your server
                     configured for using SMTP
 */
-function notifyStudent($email, $trackID, $name) {
+function notifyStudent($email, $trackID, $name, $validateCode) {
     // define the subject
     $subject = 'You have a package ready for pickup!';
 
@@ -63,6 +63,7 @@ function notifyStudent($email, $trackID, $name) {
             <div id=\"text\" style='background: #701932; color: white; margin: 3em; padding-bottom: 3em; line-height: 3em auto;'>
                 <h2>{$name},</h2>
                 <p>You have a package with tracking number {$trackID} ready for pickup!</p>
+                <p>Your code is {$ValidateCode}.</p>`
             </div>
             
         </div>

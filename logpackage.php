@@ -1,7 +1,7 @@
 <!-- Shane Flynn
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 2/22/2021 - implemented notifyStudent from functions.php
+Last Modified: 3/21/2021 - Implemented 2FA code generation
 logpackage.php -->
 
 <?php
@@ -44,15 +44,19 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   if ($search->rowCount() == 1) {
 	// get email from search query
 	$email = $return[0]['email'];
+
+    // Generate 8 character 2FA code from current ISO8601 timestamp
+    $hash = substr(md5(date('c')), 0, 8);
     
 	// prepare sql and bind parameters	
-	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID)
-    VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID)");
+	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA)
+    VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID, :2FA)");
   
     $stmt->bindParam(':building', $_POST['building']);
     $stmt->bindParam(':name_first', $_POST['nameFirst']);
     $stmt->bindParam(':name_last', $_POST['nameLast']);
     $stmt->bindParam(':tracking_ID', $_POST['trackingID']);
+    $stmt->bindParam(':2FA', $hash);
   
     $stmt->execute();
 
@@ -93,7 +97,7 @@ $trackingID = $_POST['trackingID'];
 
 $sName = $_POST['nameFirst'];
 // call notifyStudent. pass the email and tracking id to be sent in the email
-echo (notifyStudent($email, $trackingID, $sName)) ? " Notification sent" : " Error sending email.";
+echo (notifyStudent($email, $trackingID, $sName, $hash)) ? " Notification sent" : " Error sending email.";
 header("refresh:10;url=index.php");
 ?>
 
