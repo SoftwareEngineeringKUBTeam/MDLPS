@@ -1,17 +1,13 @@
 <!-- Shane Flynn
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/21/2021 - Implemented 2FA code generation
+Last Modified: 3/22/2021 - Updated DB connection for deploy
 logpackage.php -->
 
 <?php
 
 require_once("functions.php"); // used to access notifyStudent function
 
-$servername = "localhost";
-$username = "MDLPS";
-$password = "csc355_testEmail";
-$dbname = "test";
 $email = "";
 if (!isset ($_POST['trackingID']))
 {
@@ -19,10 +15,7 @@ if (!isset ($_POST['trackingID']))
     die();
 }
 try{
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
+  $conn = dbConnect();
   // search student db for record of student and retrieve email and other residential information
   $query = "SELECT email FROM STUDENT 
   WHERE `name_last` = :name_last AND `name_first` = :name_first AND `building` = :building
@@ -46,7 +39,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 	$email = $return[0]['email'];
 
     // Generate 8 character 2FA code from current ISO8601 timestamp
-    $hash = substr(md5(date('c')), 0, 8);
+    $hash = substr(md5(date('c').$_POST['trackingID']), 0, 8);
     
 	// prepare sql and bind parameters	
 	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA)

@@ -1,9 +1,9 @@
 <!-- Chris Droney
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 2/19/2021
+Last Modified: 3/22/2021
 search.php
-MDLPS main page-->
+MDLPS search page-->
 <html>
 <head>
     <meta charset="utf-8">
@@ -42,32 +42,10 @@ MDLPS main page-->
 
 </head>
 <body>
-    <!-- Load header file -->
-    <?php require_once('./header.html'); ?>
-
 <?php
-
-//Database Connection Parameters
-$servername = "localhost";
-$username = "MDLPS";
-$password = "csc355_testEmail";
-$dbname = "test";
-
-
-// Checks connection to database - for debug
-echo "<h4>DB Status: ";
-
-$conn = new mysqli($servername, $username, $password);
-if ($conn->connect_error) {
-  die("Connection failed: </h4>" . $conn->connect_error);
-}
-echo "Connected to $dbname</h4>";
-$conn->close();
-
-?>
-
-<!-- php superglobals for collecting form data -->
-<?php
+//include header
+require_once("header.html");
+//superglobals for collecting form data
 $s_tracking = isset($_GET['category']) && $_GET['category'] === 'tracking_ID';
 $s_sname = isset($_GET['category']) && $_GET['category'] === 'Student Name';
 $s_building = isset($_GET['category']) && $_GET['category'] === 'building';
@@ -101,18 +79,18 @@ $s_building = isset($_GET['category']) && $_GET['category'] === 'building';
 <?php
 require_once("functions.php");
 
+$conn = dbConnect();
+
 //container for styling search result table
 echo "<div class=\"results\">";
 
 //checking if category & term are set, and 'building' is the selected category
 if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET['term']))
 {
-    //Connecting to DB
-    $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     
     //Prepared statement
     $select = "SELECT * FROM package WHERE building = :term";
-    $stmt = $db->prepare($select);
+    $stmt = $conn->prepare($select);
     
     //Parameter Binding
     $category = $_GET['category'];
@@ -128,8 +106,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
     printTable($records);
     
-    //closing the db connection & css containter
-    $db = null;
+    //closing the css container
     echo "</div>";
 }
 
@@ -139,13 +116,10 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     //Exploding the Student Name into $name_first & $name_last
     $term = $_GET['term'];
     list($name_first, $name_last) = explode(' ', $term);
-        
-    //Connecting to DB
-    $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
     //Prepared statement
     $select = "SELECT * FROM package WHERE `name_first` = :first AND `name_last` = :last";
-    $stmt = $db->prepare($select);
+    $stmt = $conn->prepare($select);
 
     //Parameter Binding
     $category = $_GET['category'];
@@ -161,20 +135,16 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
     printTable($records);
     
-    //closing the db connection & css containter
-    $db = null;   
+    //closing the css containter
     echo "</div>";
 }
 
 //checking if category & term are set, and 'tracking_ID' is the selected category
 if (isset($_GET['category']) && ($_GET['category'] == 'tracking_ID') && isset($_GET['term'])) {
 
-    //Connecting to DB
-    $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
     //Prepared statement
     $select = "SELECT * FROM package WHERE `tracking_ID` = :term";
-    $stmt = $db->prepare($select);
+    $stmt = $conn->prepare($select);
         
     //Parameter Binding
     $category = $_GET['category'];
@@ -190,10 +160,12 @@ if (isset($_GET['category']) && ($_GET['category'] == 'tracking_ID') && isset($_
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
     printTable($records);
         
-    //closing the db connection & css containter
-    $db = null;   
+    //closing the css containter
     echo "</div>";
 }
+
+//Close DB connection
+$conn = null;
 
 
 ?>

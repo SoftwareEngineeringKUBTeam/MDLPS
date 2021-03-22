@@ -34,6 +34,23 @@ function printTable($data) {
     print "</table>";
 }
 
+/* Function Name:   dbConnect
+ * Description:     Connects to the database in the environment variable
+ * Return:          PDO of connection
+ */
+function dbConnect(){
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $db = substr($url["path"] , 1);
+
+    $conn = new PDO("mysql:host=$server, dbname=$db", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $conn;
+}
+
 
 /*
     Function Name:  notifyStudent
