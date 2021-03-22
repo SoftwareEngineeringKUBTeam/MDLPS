@@ -35,8 +35,9 @@ function printTable($data) {
 }
 
 /* Function Name:   dbConnect
- * Description:     Connects to the database in the environment variable
- * Return:          PDO of connection
+ * Author:          Hunter DeBlase
+ * Description:     Connects to the database in the environment variable CLEARDB_DATABASE_URL
+ * Return:          Database connection
  */
 function dbConnect(){
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
@@ -45,9 +46,7 @@ function dbConnect(){
     $password = $url["pass"];
     $db = substr($url["path"] , 1);
 
-    $conn = new PDO("mysql:host=$server, dbname=$db", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
     return $conn;
 }
 

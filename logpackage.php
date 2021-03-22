@@ -5,29 +5,25 @@ Last Modified: 3/22/2021 - Updated DB connection for deploy
 logpackage.php -->
 
 <?php
-
 require_once("functions.php"); // used to access notifyStudent function
-
 $email = "";
 if (!isset ($_POST['trackingID']))
 {
+    echo "Tracking ID Invalid";
     header ('Location: index.php');
     die();
 }
 try{
   $conn = dbConnect();
   // search student db for record of student and retrieve email and other residential information
-  $query = "SELECT email FROM STUDENT 
-  WHERE `name_last` = :name_last AND `name_first` = :name_first AND `building` = :building
-  AND `room_num` = :room_num AND `bed_letter` = :bed_letter"; 
+  $query = "SELECT email FROM STUDENT WHERE `name_last` = :name_last AND `name_first` = :name_first AND `building` = :building AND `room_num` = :room_num AND `bed_letter` = :bed_letter"; 
   $search = $conn->prepare($query);
-  
   // prepare sql and bind parameters
-  $search->bindParam(':name_last', $_POST['nameLast']);
-  $search->bindParam(':name_first', $_POST['nameFirst']);
-  $search->bindParam(':building', $_POST['building']);
-  $search->bindParam(':room_num', $_POST['roomNum']);
-  $search->bindParam(':bed_letter', $_POST['bedLetter']);
+  $search->bindParam(":name_last", $_POST['nameLast']);
+  $search->bindParam(":name_first", $_POST['nameFirst']);
+  $search->bindParam(":building", $_POST['building']);
+  $search->bindParam(":room_num", $_POST['roomNum']);
+  $search->bindParam(":bed_letter", $_POST['bedLetter']);
   
   $search->execute();
   
@@ -42,14 +38,13 @@ try{
     $hash = substr(md5(date('c').$_POST['trackingID']), 0, 8);
     
 	// prepare sql and bind parameters	
-	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA)
-    VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID, :2FA)");
+	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA) VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID, :2FA)");
   
-    $stmt->bindParam(':building', $_POST['building']);
-    $stmt->bindParam(':name_first', $_POST['nameFirst']);
-    $stmt->bindParam(':name_last', $_POST['nameLast']);
-    $stmt->bindParam(':tracking_ID', $_POST['trackingID']);
-    $stmt->bindParam(':2FA', $hash);
+    $stmt->bindParam(":building", $_POST['building']);
+    $stmt->bindParam(":name_first",  $_POST['nameFirst']);
+    $stmt->bindParam(":name_last", $_POST['nameLast']);
+    $stmt->bindParam(":tracking_ID", $_POST['trackingID']);
+    $stmt->bindParam(":2FA", $hash);
   
     $stmt->execute();
 

@@ -89,7 +89,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
 {
     
     //Prepared statement
-    $select = "SELECT * FROM package WHERE building = :term";
+    $select = "SELECT * FROM package WHERE building = ?"
     $stmt = $conn->prepare($select);
     
     //Parameter Binding
@@ -118,13 +118,12 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     list($name_first, $name_last) = explode(' ', $term);
 
     //Prepared statement
-    $select = "SELECT * FROM package WHERE `name_first` = :first AND `name_last` = :last";
+    $select = "SELECT * FROM package WHERE `name_first` = ? AND `name_last` = ?";
     $stmt = $conn->prepare($select);
 
     //Parameter Binding
     $category = $_GET['category'];
-    $stmt->bindParam(':first', $name_first);
-    $stmt->bindParam(':last', $name_last);
+    $stmt->bindParam($name_first, $name_last);
 
     $stmt->execute();
 
@@ -143,7 +142,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
 if (isset($_GET['category']) && ($_GET['category'] == 'tracking_ID') && isset($_GET['term'])) {
 
     //Prepared statement
-    $select = "SELECT * FROM package WHERE `tracking_ID` = :term";
+    $select = "SELECT * FROM package WHERE `tracking_ID` = ?";
     $stmt = $conn->prepare($select);
         
     //Parameter Binding
