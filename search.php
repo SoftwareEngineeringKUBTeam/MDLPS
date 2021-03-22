@@ -89,7 +89,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
 {
     
     //Prepared statement
-    $select = "SELECT * FROM package WHERE building = :term"
+    $select = "SELECT * FROM package WHERE building = :term";
     $stmt = $conn->prepare($select);
     
     //Parameter Binding
