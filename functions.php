@@ -34,6 +34,22 @@ function printTable($data) {
     print "</table>";
 }
 
+/* Function Name:   dbConnect
+ * Author:          Hunter DeBlase
+ * Description:     Connects to the database in the environment variable CLEARDB_DATABASE_URL
+ * Return:          Database connection
+ */
+function dbConnect(){
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $server = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $db = substr($url["path"] , 1);
+
+    $conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
+    return $conn;
+}
+
 
 /*
     Function Name:  notifyStudent
@@ -48,7 +64,7 @@ function printTable($data) {
     Considerations: For the PHP mail function to work you must have your server
                     configured for using SMTP
 */
-function notifyStudent($email, $trackID, $name) {
+function notifyStudent($email, $trackID, $name, $validateCode) {
     // define the subject
     $subject = 'You have a package ready for pickup!';
 
@@ -63,6 +79,7 @@ function notifyStudent($email, $trackID, $name) {
             <div id=\"text\" style='background: #701932; color: white; margin: 3em; padding-bottom: 3em; line-height: 3em auto;'>
                 <h2>{$name},</h2>
                 <p>You have a package with tracking number {$trackID} ready for pickup!</p>
+                <p>Your code is {$ValidateCode}.</p>`
             </div>
             
         </div>

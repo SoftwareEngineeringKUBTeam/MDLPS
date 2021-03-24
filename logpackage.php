@@ -1,40 +1,29 @@
 <!-- Shane Flynn
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 2/22/2021 - implemented notifyStudent from functions.php
+Last Modified: 3/22/2021 - Updated DB connection for deploy
 logpackage.php -->
 
 <?php
-
 require_once("functions.php"); // used to access notifyStudent function
-
-$servername = "localhost";
-$username = "MDLPS";
-$password = "csc355_testEmail";
-$dbname = "test";
 $email = "";
 if (!isset ($_POST['trackingID']))
 {
+    echo "Tracking ID Invalid";
     header ('Location: index.php');
     die();
 }
 try{
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
+  $conn = dbConnect();
   // search student db for record of student and retrieve email and other residential information
-  $query = "SELECT email FROM STUDENT 
-  WHERE `name_last` = :name_last AND `name_first` = :name_first AND `building` = :building
-  AND `room_num` = :room_num AND `bed_letter` = :bed_letter"; 
+  $query = "SELECT email FROM STUDENT WHERE `name_last` = :name_last AND `name_first` = :name_first AND `building` = :building AND `room_num` = :room_num AND `bed_letter` = :bed_letter"; 
   $search = $conn->prepare($query);
-  
   // prepare sql and bind parameters
-  $search->bindParam(':name_last', $_POST['nameLast']);
-  $search->bindParam(':name_first', $_POST['nameFirst']);
-  $search->bindParam(':building', $_POST['building']);
-  $search->bindParam(':room_num', $_POST['roomNum']);
-  $search->bindParam(':bed_letter', $_POST['bedLetter']);
+  $search->bindParam(":name_last", $_POST['nameLast']);
+  $search->bindParam(":name_first", $_POST['nameFirst']);
+  $search->bindParam(":building", $_POST['building']);
+  $search->bindParam(":room_num", $_POST['roomNum']);
+  $search->bindParam(":bed_letter", $_POST['bedLetter']);
   
   $search->execute();
   
@@ -44,15 +33,18 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
   if ($search->rowCount() == 1) {
 	// get email from search query
 	$email = $return[0]['email'];
+
+    // Generate 8 character 2FA code from current ISO8601 timestamp
+    $hash = substr(md5(date('c').$_POST['trackingID']), 0, 8);
     
 	// prepare sql and bind parameters	
-	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID)
-    VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID)");
+	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA) VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID, :2FA)");
   
-    $stmt->bindParam(':building', $_POST['building']);
-    $stmt->bindParam(':name_first', $_POST['nameFirst']);
-    $stmt->bindParam(':name_last', $_POST['nameLast']);
-    $stmt->bindParam(':tracking_ID', $_POST['trackingID']);
+    $stmt->bindParam(":building", $_POST['building']);
+    $stmt->bindParam(":name_first",  $_POST['nameFirst']);
+    $stmt->bindParam(":name_last", $_POST['nameLast']);
+    $stmt->bindParam(":tracking_ID", $_POST['trackingID']);
+    $stmt->bindParam(":2FA", $hash);
   
     $stmt->execute();
 
@@ -93,7 +85,7 @@ $trackingID = $_POST['trackingID'];
 
 $sName = $_POST['nameFirst'];
 // call notifyStudent. pass the email and tracking id to be sent in the email
-echo (notifyStudent($email, $trackingID, $sName)) ? " Notification sent" : " Error sending email.";
+echo (notifyStudent($email, $trackingID, $sName, $hash)) ? " Notification sent" : " Error sending email.";
 header("refresh:10;url=index.php");
 ?>
 
