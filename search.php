@@ -1,7 +1,7 @@
 <!-- Chris Droney
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/22/2021
+Last Modified: 3/24/2021
 search.php
 MDLPS search page-->
 <html>
@@ -118,12 +118,13 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     list($name_first, $name_last) = explode(' ', $term);
 
     //Prepared statement
-    $select = "SELECT * FROM package WHERE `name_first` = ? AND `name_last` = ?";
+    $select = "SELECT * FROM package WHERE `name_first` = :name_first AND `name_last` = :name_last";
     $stmt = $conn->prepare($select);
 
     //Parameter Binding
     $category = $_GET['category'];
-    $stmt->bindParam($name_first, $name_last);
+    $stmt->bindParam(":name_first", $name_first);
+    $stmt->bindParam(":name_last", $name_last);
 
     $stmt->execute();
 
