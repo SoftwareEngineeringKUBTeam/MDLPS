@@ -77,9 +77,10 @@ try{
 } catch(PDOException $e) {
   echo "Error: " . $e->getMessage();
 }
-$conquery = $conn -> query("SELECT 2FA, log_date, tracking_ID FROM PACKAGE WHERE name_first = MDLPS");
+$conquery = $conn->query("SELECT 2FA, log_date, tracking_ID FROM PACKAGE WHERE name_first = MDLPS");
 while ($row = $conquery->FETCH_ASSOC()){
-echo verify2fa($row['2FA'], $row['log_date'], $row['tracking_ID']);
+if (verify2fa($row['2FA'], $row['log_date'], $row['tracking_ID'])){
+echo "true";}
 }
 $conn = null;
 
