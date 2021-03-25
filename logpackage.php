@@ -80,9 +80,7 @@ try{
   echo "Error: " . $e->getMessage();
 }
 
-if (verify2fa("72764a67", "2021-03-25 20:14:30", "TEST9")){
-echo "true";}
-else echo "false";
+echo (verify2fa("72764a67", "2021-03-25 20:14:30", "TEST9"))
 $conn = null;
 
 $trackingID = $_POST['trackingID'];

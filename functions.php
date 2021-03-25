@@ -57,7 +57,7 @@ function dbConnect(){
  */
 function verify2fa($validate, $logdate, $trackId){
 $hash = substr(md5($logdate.$trackingId), 0, 8);
-return $validate == $hash;
+return $hash;
 }
 
 /*
