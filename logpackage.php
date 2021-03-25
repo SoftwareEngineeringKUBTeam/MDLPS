@@ -80,7 +80,7 @@ try{
   echo "Error: " . $e->getMessage();
 }
 
-if (verify2fa("4576cc96", "2021-03-25 20:11:29", "TEST8")){
+if (verify2fa("72764a67", "2021-03-25 20:14:30", "TEST9")){
 echo "true";}
 else echo "false";
 $conn = null;
