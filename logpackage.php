@@ -81,6 +81,7 @@ $conquery = $conn->query("SELECT 2FA, log_date, tracking_ID FROM PACKAGE WHERE n
 while ($row = $conquery->FETCH_ASSOC()){
 if (verify2fa($row['2FA'], $row['log_date'], $row['tracking_ID'])){
 echo "true";}
+else echo "false";
 }
 $conn = null;
 
