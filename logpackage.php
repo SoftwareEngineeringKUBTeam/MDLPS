@@ -81,7 +81,6 @@ try{
 if (verify2fa("d7f7faaa", "2021-03-22 21:05:27", "TESTING")){
 echo "true";}
 else echo "false";
-}
 $conn = null;
 
 $trackingID = $_POST['trackingID'];
