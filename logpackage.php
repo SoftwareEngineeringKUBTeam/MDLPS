@@ -35,7 +35,7 @@ try{
 	$email = $return[0]['email'];
 
     // Generate 8 character 2FA code from current ISO8601 timestamp
-    $hash = substr(md5(date('c').$_POST['trackingID']), 0, 8);
+    $hash = substr(md5(date('Y-m-d H:i:s').$_POST['trackingID']), 0, 8);
     
 	// prepare sql and bind parameters	
 	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA) VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID, :2FA)");
