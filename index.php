@@ -1,9 +1,17 @@
 <!-- Hunter DeBlase
 Mail Delivery Logging and Processing System
 Creation Date: 11/30/2020
-Last Modified: 2/22/2021 - commented out email form for testing, changed bed letter scheme
+Last Modified: 3/27/2021 - check for logged in session before continuing
 index.php
 MDLPS main page-->
+
+<!-- check if user is logged in, if not, redirect to login page -->
+<?php
+    session_start();
+    include("functions.php");
+    checkLogin();
+?>
+
 <html>
 <head>
     <meta charset="utf-8">
