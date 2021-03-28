@@ -50,7 +50,7 @@ try {
         //bind the parameters
         $sql->bindParam(':user', $user);
         $sql->bindParam(':passwd', $passwd);
-        $sql->execute()
+        $sql->execute();
                 
         //check if database returned a result. if yes, register the session
         if($sql->rowCount() == 1) {
