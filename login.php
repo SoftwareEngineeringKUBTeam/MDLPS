@@ -53,7 +53,7 @@ login.php -->
         if(mysqli_num_rows($result) == 1) {
             
             $_SESSION["loggedin"] = $user;
-            header("Location: index.php");
+            header("Location: index.html");
         }
         //username or password didn't match, don't log in
         else {
