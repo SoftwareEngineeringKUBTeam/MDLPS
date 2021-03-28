@@ -55,7 +55,7 @@ try {
         $records = $search->fetchall(PDO::FETCH_ASSOC);
         
         //check if database returned a result. if yes, register the session
-        if($records == 1) {
+        if($records) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
@@ -64,7 +64,6 @@ try {
         //username or password didn't match, don't log in
         else {
             //message to display on login page if incorrect credentials
-            header("Refresh:0");
             $invalid = "Invalid username or password, please try again.";
         }
     }    
