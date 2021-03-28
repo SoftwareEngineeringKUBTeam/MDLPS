@@ -53,10 +53,10 @@ try {
         $search->execute();
 
         $record = $search->rowCount();
-        echo $record;
-        /*       
+        
+               
         //check if database returned a result. if yes, register the session
-        if() {
+        if($record == 1) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
@@ -66,7 +66,7 @@ try {
         else {
             //message to display on login page if incorrect credentials
             $invalid = "Invalid username or password, please try again.";
-        }*/
+        }
     }    
 }
 catch(PDOException $e) {
