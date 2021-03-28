@@ -55,7 +55,7 @@ try {
         //$records = $search->fetchall(PDO::FETCH_NAMED);
         
         //check if database returned a result. if yes, register the session
-        if($search->execute() == 1) {
+        if($conn->query($search)) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
