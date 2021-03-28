@@ -1,6 +1,7 @@
 <!--  Nick Naylor
 Mail Delivery Logging and Processing System
 Creation Date: 03/25/2021
+Last Updated:  03/27/2021 - Got to work with site server
 login page for MDLPS
 login.php -->
 
@@ -20,14 +21,7 @@ login.php -->
         logout();
     }
 
-//                  DELETE WHEN PUSHED TO ORIGIN FOR WEBSITE
-/*************************************************************************************
-    define('DB_SERVER','localhost');
-    define('DB_USERNAME','MDLPS');
-    define('DB_PASSWORD','csc355_testEmail');
-    define('DB_NAME','test');
-    $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_NAME);
-*************************************************************************************/
+
 try {
     //use dbConnect to assign $conn variable
     $conn = dbConnect();
