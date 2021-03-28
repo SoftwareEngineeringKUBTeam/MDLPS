@@ -53,7 +53,7 @@ try {
         $sql->execute();
                 
         //check if database returned a result. if yes, register the session
-        if($sql->rowCount() == 1) {
+        if($sql->fetchall()) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
