@@ -41,19 +41,22 @@ try {
     if(isset($_POST["username"]) && isset($_POST["password"])) {
 
         $sql = ("SELECT * FROM logininfo WHERE user = :user AND BINARY pass = :passwd");
-        //$search = $conn->prepare($sql);
+        $search = $conn->prepare($sql);
 
         //get fields from form
         $user = $_POST["username"]; //get username field
         $passwd = $_POST["password"]; //get password field
 
         //bind the parameters
-        $sql->bindParam(':user', $user);
-        $sql->bindParam(':passwd', $passwd);
-        $sql->execute();
-                
+        $search->bindParam(':user', $user);
+        $search->bindParam(':passwd', $passwd);
+        $search->execute();
+
+        $record = $search->fetchall(PDO::FETCH_ASSOC);
+        printTable($record);
+        /*       
         //check if database returned a result. if yes, register the session
-        if($sql->fetchall()) {
+        if() {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
@@ -63,7 +66,7 @@ try {
         else {
             //message to display on login page if incorrect credentials
             $invalid = "Invalid username or password, please try again.";
-        }
+        }*/
     }    
 }
 catch(PDOException $e) {
