@@ -13,12 +13,8 @@ logout.php -->
     //use functions.php for the logout function
     include("functions.php");
 
-    //start a session
-    session_start();
-
-    //check if user is already logged in
-    if(isset($_SESSION["loggedin"])) {
-        logout();
-    }
+    //logout the user
+    logout();
+    
 ?>
 
