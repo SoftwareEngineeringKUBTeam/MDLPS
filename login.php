@@ -40,7 +40,7 @@ try {
     
     if(isset($_POST["username"]) && isset($_POST["password"])) {
 
-        $sql = ("SELECT * FROM logininfo WHERE user = :user AND pass = :passwd");
+        $sql = ("SELECT * FROM logininfo WHERE user = :user AND BINARY pass = :passwd");
         //$search = $conn->prepare($sql);
 
         //get fields from form
