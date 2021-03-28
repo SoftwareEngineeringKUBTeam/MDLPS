@@ -38,7 +38,7 @@ login.php -->
         die("error: couldn't connect to database" . mysqli_connect_error());
     }
     
-    //if($_SERVER["REQUEST_METHOD"] == "POST") {
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //use mysqlie_real_escape_string to escape special characters when querying database
         $user = mysqli_real_escape_string($db, $_POST["username"]); //get username field
@@ -60,7 +60,7 @@ login.php -->
             //message to display on login page if incorrect credentials
             $invalid = "Invalid username or password, please try again.";
         }
-    //}    
+    }    
 ?>
 
 <!-- start of html page -->
