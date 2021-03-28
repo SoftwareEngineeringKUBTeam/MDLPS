@@ -38,19 +38,21 @@ try {
         die("error: couldn't connect to database" . mysqli_connect_error());
     }
     
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(isset($_POST["username"]) && isset($_POST["password"])) {
 
-        //use mysqlie_real_escape_string to escape special characters when querying database
-        $user = mysqli_real_escape_string($conn, $_POST["username"]); //get username field
-        $passwd = mysqli_real_escape_string($conn, $_POST["password"]); //get password field
+        $sql = "SELECT * FROM logininfo WHERE user = :user AND BINARY pass = :passwd limit 1";
+        $search = $conn->prepare($sql);
+
+        //get fields from form
+        $user = $_POST["username"]; //get username field
+        $passwd = $_POST["password"]; //get password field
+
+        //bind the parameters
+        $search->bindParam(':user', $user);
+        $search->bindParam(':passwd', $passwd);
         
-        //method to search for the username and password in the database. password case sensitive
-        $sql = "SELECT * FROM logininfo WHERE user='".$user."'AND BINARY pass='".$passwd."' limit 1";
-        //query the database using sql variable
-        $result = mysqli_query($conn,$sql);
-
         //check if database returned a result. if yes, register the session
-        if(mysqli_num_rows($result) == 1) {
+        if($search->execute()) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
