@@ -41,21 +41,21 @@ try {
     if(isset($_POST["username"]) && isset($_POST["password"])) {
 
         $sql = "SELECT * FROM logininfo WHERE user = :user AND BINARY pass = :passwd limit 1";
-        $search = $conn->prepare($sql);
+        //$search = $conn->prepare($sql);
 
         //get fields from form
         $user = $_POST["username"]; //get username field
         $passwd = $_POST["password"]; //get password field
 
         //bind the parameters
-        $search->bindParam(':user', $user);
-        $search->bindParam(':passwd', $passwd);
+        $sql->bindParam(':user', $user);
+        $sql->bindParam(':passwd', $passwd);
 
-        $records = $search->execute()
+        //$records = $search->execute()
         //$records = $search->fetchall(PDO::FETCH_NAMED);
         
         //check if database returned a result. if yes, register the session
-        if($conn->query($records)) {
+        if($conn->query($sql)) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
