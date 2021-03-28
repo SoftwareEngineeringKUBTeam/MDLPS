@@ -28,7 +28,7 @@ login.php -->
     define('DB_NAME','test');
     $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_NAME);
 *************************************************************************************/
-
+try {
     //use dbConnect to assign $conn variable
     $conn = dbConnect();
 
@@ -53,7 +53,7 @@ login.php -->
         if(mysqli_num_rows($result) == 1) {
             
             $_SESSION["loggedin"] = $user;
-            header("Location: index.html");
+            header("Location: index.php");
         }
         //username or password didn't match, don't log in
         else {
@@ -61,6 +61,12 @@ login.php -->
             $invalid = "Invalid username or password, please try again.";
         }
     }    
+}
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
+   
 ?>
 
 <!-- start of html page -->
