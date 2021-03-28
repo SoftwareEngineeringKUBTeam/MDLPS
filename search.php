@@ -1,9 +1,17 @@
 <!-- Chris Droney
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/24/2021
+Last Modified: 3/27/2021 - check for logged in session before continuing
 search.php
 MDLPS search page-->
+
+<!-- check if user is logged in, if not, redirect to login page -->
+<?php
+    session_start();
+    include("functions.php");
+    checkLogin();
+?>
+
 <html>
 <head>
     <meta charset="utf-8">

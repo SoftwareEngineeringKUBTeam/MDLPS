@@ -1,11 +1,17 @@
 <!-- Shane Flynn
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/22/2021 - Updated DB connection for deploy
+Last Modified: 3/27/2021 - check for logged in session before continuing
 logpackage.php -->
 
 <?php
 require_once("functions.php"); // used to access notifyStudent function
+
+//require user to be logged in before using this
+session_start();
+checkLogin();
+
+
 $email = "";
 if (!isset ($_POST['trackingID']))
 {
