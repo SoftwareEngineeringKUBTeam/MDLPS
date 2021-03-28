@@ -21,16 +21,16 @@ login.php -->
     }
 
 //                  DELETE WHEN PUSHED TO ORIGIN FOR WEBSITE
-/*************************************************************************************/
+/*************************************************************************************
     define('DB_SERVER','localhost');
     define('DB_USERNAME','MDLPS');
     define('DB_PASSWORD','csc355_testEmail');
     define('DB_NAME','test');
     $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_NAME);
-/*************************************************************************************/
+*************************************************************************************/
 
     //use dbConnect to assign $db variable
-    //$db = dbConnect();
+    $db = dbConnect();
 
 
     //check if database is connected
