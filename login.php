@@ -52,7 +52,7 @@ try {
         $search->bindParam(':passwd', $passwd);
         $search->execute();
 
-        $record = $search->rowCount();
+        $record = $conn->rowCount($search);
         printTable($record);
         /*       
         //check if database returned a result. if yes, register the session
