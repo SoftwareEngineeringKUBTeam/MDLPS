@@ -52,7 +52,7 @@ try {
         $search->bindParam(':passwd', $passwd);
 
         $search->execute()
-        $records = $search->fetchall(PDO::FETCH_BOTH);
+        $records = $search->fetchall(PDO::FETCH_NAMED);
         
         //check if database returned a result. if yes, register the session
         if($records) {
