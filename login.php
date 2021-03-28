@@ -26,28 +26,28 @@ login.php -->
     define('DB_USERNAME','MDLPS');
     define('DB_PASSWORD','csc355_testEmail');
     define('DB_NAME','test');
-    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_NAME);
+    $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_NAME);
 *************************************************************************************/
 
-    //use dbConnect to assign $db variable
-    $db = dbConnect();
+    //use dbConnect to assign $conn variable
+    $conn = dbConnect();
 
 
     //check if database is connected
-    if(!$db) {
+    if(!$conn) {
         die("error: couldn't connect to database" . mysqli_connect_error());
     }
     
     if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //use mysqlie_real_escape_string to escape special characters when querying database
-        $user = mysqli_real_escape_string($db, $_POST["username"]); //get username field
-        $passwd = mysqli_real_escape_string($db, $_POST["password"]); //get password field
+        $user = mysqli_real_escape_string($conn, $_POST["username"]); //get username field
+        $passwd = mysqli_real_escape_string($conn, $_POST["password"]); //get password field
         
         //method to search for the username and password in the database. password case sensitive
         $sql = "SELECT * FROM logininfo WHERE user='".$user."'AND BINARY pass='".$passwd."' limit 1";
         //query the database using sql variable
-        $result = mysqli_query($db,$sql);
+        $result = mysqli_query($conn,$sql);
 
         //check if database returned a result. if yes, register the session
         if(mysqli_num_rows($result) == 1) {
