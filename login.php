@@ -59,6 +59,7 @@ try {
         //username or password didn't match, don't log in
         else {
             //message to display on login page if incorrect credentials
+            header("Refresh:0");
             $invalid = "Invalid username or password, please try again.";
         }
     }    
