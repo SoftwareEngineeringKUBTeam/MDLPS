@@ -54,6 +54,7 @@ try {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
+            die();
         }
         //username or password didn't match, don't log in
         else {
@@ -66,7 +67,7 @@ catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
   }
   $conn = null;
-   
+
 ?>
 
 <!-- start of html page -->
