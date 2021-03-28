@@ -128,7 +128,7 @@ function logout() {
     Returns:        N/A
 */
 function checkLogin() {
-    
+    session_start();
     //make sure loggedin is set. if not, redirect to login.php
     if(!isset($_SESSION["loggedin"])) {        
         header("Location: login.php");
