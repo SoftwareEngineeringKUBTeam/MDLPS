@@ -51,11 +51,11 @@ try {
         $search->bindParam(':user', $user);
         $search->bindParam(':passwd', $passwd);
 
-        $search->execute()
-        $records = $search->fetchall(PDO::FETCH_NAMED);
+        //$search->execute()
+        //$records = $search->fetchall(PDO::FETCH_NAMED);
         
         //check if database returned a result. if yes, register the session
-        if($records) {
+        if($search->execute()) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
