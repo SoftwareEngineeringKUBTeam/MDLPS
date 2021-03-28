@@ -94,9 +94,9 @@ login.php -->
                 <input type="submit" value="Submit">
             </form>
             <!-- error message if invalid login credentials -->
-            <div style = "font-size:12px; color:red; margin-top:10px">
-                <?php if(isset($invalid)){echo $invalid;} ?>
-            </div>
+           <!-- <div style = "font-size:12px; color:red; margin-top:10px">
+                <?php if(isset($invalid)){echo $invalid;} ?> 
+            </div> -->
         </div>
     </div>
 

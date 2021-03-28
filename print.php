@@ -6,13 +6,16 @@ Last Modified: 3/27/2020 - check for logged in session before continuing
 print.php
 Prints contents of POST array for debugging.
 -->
+<?php
+     //user must be logged in for this to work
+     session_start();
+     include("functions.php");
+     checkLogin();
+?> 
+
 <pre>
 <?php
-    //user must be logged in for this to work
-    session_start();
-    include("functions.php");
-    checkLogin();
-
+   
     print_r($_POST);
 ?>
 </pre>
