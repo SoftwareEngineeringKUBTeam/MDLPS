@@ -1,7 +1,7 @@
 <!--  Nick Naylor
 Mail Delivery Logging and Processing System
 Creation Date: 03/25/2021
-Last Updated:  03/27/2021 - Got to work with site server
+Last Updated:  03/30/2021 - updated to verify hashed password
 login page for MDLPS
 login.php -->
 
@@ -49,7 +49,7 @@ try {
         $hash = $search->fetchColumn(1);        
         $record = $search->rowCount();
         
-        echo $hash;       
+              
         //check if database returned a result. if yes, register the session
         if(($record == 1) && (password_verify($passwd, $hash))) {
             
