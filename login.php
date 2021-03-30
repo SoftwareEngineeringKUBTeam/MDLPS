@@ -49,7 +49,7 @@ try {
         $hash = $search->fetchColumn(1);        
         $record = $search->rowCount();
         
-               
+        echo $hash;       
         //check if database returned a result. if yes, register the session
         if(($record == 1) && (password_verify($passwd, $hash))) {
             
