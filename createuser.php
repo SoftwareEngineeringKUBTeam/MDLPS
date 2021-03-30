@@ -16,8 +16,10 @@ try{
 	$stmt = $conn->prepare($sql);
 	// prepare sql and bind parameters
 	
+	$passhash = password_hash($_POST['Passwd'], PASSWORD_DEFAULT);
+	
 	$stmt->bindParam(":User", $_POST['User']);
-	$stmt->bindParam(":Passwd", $_POST['Passwd']);
+	$stmt->bindParam(":Passwd", $passhash);
 	$stmt->bindParam(":Position", $_POST['Position']);
 	$stmt->bindParam(":nameFirst", $_POST['nameFirst']);
 	$stmt->bindParam(":nameLast", $_POST['nameLast']);
@@ -29,7 +31,7 @@ try{
 	} catch(PDOException $e) {
 		echo "Error: " . $e->getMessage();
 	}
-	header("refresh:10;url=index.php");
+	header("url=admin.php");
 	
 	
 ?>
