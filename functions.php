@@ -46,12 +46,12 @@ function printTable($data) {
  */
 function dbConnect(){
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $server = $url["host"];
-    $username = $url["user"];
+	$server = $url["host"];
+	$username = $url["user"];
     $password = $url["pass"];
     $db = substr($url["path"] , 1);
 
-    $conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
+	$conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
     return $conn;
 }
 
