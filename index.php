@@ -40,18 +40,15 @@ MDLPS main page-->
                     <option>Building 2</option>
                     <option>Building 3</option>
                     <option>Building 4</option>
-		</select>
+				</select>
 		<input class="line" type="text" name="roomNum" placeholder="Room Number" maxLength="4" size="6" required>
 		<select class="line" name="bedLetter" placeholder="Bed Letter">
-			<option>A</option>
-			<option>B</option>
-			<option>C</option>
-			<option>D</option>
-			<option>E</option>
-			<!--
-			Bed letters need to be single characters to be searched in the database
-			otherwise, "Bed A" does not correspond with column bed_letter "A"
-			-->
+			<option value="A">Bed A</option>
+			<option value="B">Bed B</option>
+			<option value="C">Bed C</option>
+			<option value="D">Bed D</option>
+			<option value="E">Bed E</option>
+		</select>
 		<input type="submit" value="Submit">
 		<input class="line" type="reset" value="Clear Form">
             </form>

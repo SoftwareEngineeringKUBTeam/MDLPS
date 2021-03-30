@@ -24,26 +24,28 @@ MDLPS search page-->
 require_once("header.html");?>
 <div class="create user">
         <!-- Log section's header -->
-        <div class="createhead">
-            <h2>Add User</h2>
-        </div>
+    <div class="createhead">
+        <h2>Add User</h2>
+    </div>
         <!-- Container for styling forms -->
-        <div class="forms">
+        <div class="log">
             <form method="post" action="createuser.php">
                 <input type="text" name="User" placeholder="Username" required autofocus>
                 <input type="text" name="Passwd" placeholder="Password" required>
                 <input type="text" name="nameFirst" placeholder="First Name" required>
 				<input type="text" name="nameLast" placeholder="Last Name" required>
 				<select name="Position" placeholder="Position">
-                    <option>DR</option>
-                    <option>ARD</option>
-                    <option>RD</option>
-                    <option>COADMIN</option>
-                    <option>SYSADMIN</option>
-				<input class="line" type="submit" value="Create User">
-				<input class="line" type="reset" value="Clear Form">
-
+                    <option value="DR">Desk Receptionist</option>
+                    <option value="ARD">Assistant Resident Director</option>
+                    <option value="RD">Resident Director</option>
+                    <option value="COADMIN">Central Office Administrator</option>
+                    <option value="SYSADMIN">System Administrator</option>
+				</select>
+				<input type="submit" value="Create User">
+				<input type="reset" value="Clear Form">
+			</form>
 		</div>
+	</div>
 		
 </body>
 </html>
