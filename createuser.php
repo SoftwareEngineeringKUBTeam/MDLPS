@@ -26,13 +26,14 @@ try{
 	
 	$stmt->execute();
 					  
-	//$return = $search->fetchall(PDO::FETCH_ASSOC);
-				
+	echo "<h1>User" . $_POST['User'] . " added successfully!</h1>";			
+	
 	} catch(PDOException $e) {
 		echo "Error: " . $e->getMessage();
 	}
-	header("Location: admin.php");
 	
+	header("Location: admin.php");
+
 	
 ?>
 

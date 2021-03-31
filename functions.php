@@ -84,7 +84,7 @@ function notifyStudent($email, $trackID, $name, $validateCode) {
             <div id=\"text\" style='background: #701932; color: white; margin: 3em; padding-bottom: 3em; line-height: 3em auto;'>
                 <h2>{$name},</h2>
                 <p>You have a package with tracking number {$trackID} ready for pickup!</p>
-                <p>Your code is {$ValidateCode}.</p>`
+                <p>Your code is {$validateCode}.</p>`
             </div>
             
         </div>
