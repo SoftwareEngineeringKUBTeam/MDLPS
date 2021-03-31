@@ -21,7 +21,6 @@ login.php -->
         logout();
     }
 
-
 try {
     //use dbConnect to assign $conn variable
     $conn = dbConnect();
@@ -45,9 +44,10 @@ try {
         $search->bindParam(':user', $user);
         
         $search->execute();
-
-
-        $hash = $search->fetchColumn(1);        
+		// store user info in session variable to be used across website
+		$_SESSION["userInfo"] = $search->fetch(PDO::FETCH_ASSOC);
+        $result = $_SESSION["userInfo"];
+		$hash = $result["pass"];        
         $record = $search->rowCount();
         
         //check if database returned a result. if yes, register the session
