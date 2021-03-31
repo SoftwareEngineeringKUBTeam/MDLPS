@@ -10,6 +10,13 @@ MDLPS search page-->
     session_start();
     include("functions.php");
     checkLogin();
+	$userinfo = $_SESSION["userInfo"];
+	// does not allow users who do not have SYSADMIN accessLevel to access this page
+	if ($userinfo["accessLevel"] !== "SYSADMIN"){
+		header("Location: index.php");
+		die();
+	}
+
 ?>
 
 <html>
@@ -46,6 +53,5 @@ require_once("header.html");?>
 			</form>
 		</div>
 	</div>
-		
 </body>
 </html>

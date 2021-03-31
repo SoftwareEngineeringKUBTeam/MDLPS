@@ -46,9 +46,17 @@ try {
         $search->bindParam(':passwd', $passwd);
         $search->execute();
 
-        $record = $search->rowCount();
         
-               
+		// store result in array to access user info
+		$result = $search->fetch(PDO::FETCH_ASSOC);
+		// store user info in session variable
+		$_SESSION["userInfo"] = $result;
+		$hash = $result['pass'];
+		
+        $record = $search->rowCount();
+		
+              
+
         //check if database returned a result. if yes, register the session
         if($record == 1) {
             
