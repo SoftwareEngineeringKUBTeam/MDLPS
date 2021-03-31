@@ -1,7 +1,7 @@
 <!--  Nick Naylor
 Mail Delivery Logging and Processing System
 Creation Date: 03/25/2021
-Last Updated:  03/27/2021 - Got to work with site server
+Last Updated:  03/30/2021 - updated to verify hashed password
 login page for MDLPS
 login.php -->
 
@@ -34,7 +34,7 @@ try {
     
     if(isset($_POST["username"]) && isset($_POST["password"])) {
 
-        $sql = ("SELECT * FROM logininfo WHERE user = :user AND BINARY pass = :passwd");
+        $sql = ("SELECT * FROM logininfo WHERE user = :user");
         $search = $conn->prepare($sql);
 
         //get fields from form
@@ -43,22 +43,15 @@ try {
 
         //bind the parameters
         $search->bindParam(':user', $user);
-        $search->bindParam(':passwd', $passwd);
+        
         $search->execute();
 
-        
-		// store result in array to access user info
-		$result = $search->fetch(PDO::FETCH_ASSOC);
-		// store user info in session variable
-		$_SESSION["userInfo"] = $result;
-		$hash = $result['pass'];
-		
-        $record = $search->rowCount();
-		
-              
 
+        $hash = $search->fetchColumn(1);        
+        $record = $search->rowCount();
+        
         //check if database returned a result. if yes, register the session
-        if($record == 1) {
+        if(($record == 1) && (password_verify($passwd, $hash))) {
             
             $_SESSION["loggedin"] = $user;
             header("Location: index.php");
