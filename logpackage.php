@@ -40,13 +40,15 @@ try{
 	// get email from search query
 	$email = $return[0]['email'];
 
-    // Generate 8 character 2FA code from current ISO8601 timestamp
-    $hash = substr(md5(date('Y-m-d H:i:s').$_POST['trackingID']), 0, 8);
-    
+	$date = date('Y-m-d H:i:s');
+    // Generate 8 character 2FA code from current timestamp
+    $hash = substr(md5($date.$_POST['trackingID']), 0, 8);
+	
 	// prepare sql and bind parameters	
-	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA) VALUES (:building, NOW(), :name_first, :name_last, :tracking_ID, :2FA)");
+	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA) VALUES (:building, :date, :name_first, :name_last, :tracking_ID, :2FA)");
   
     $stmt->bindParam(":building", $_POST['building']);
+	$stmt->bindParam(":date", $date);
     $stmt->bindParam(":name_first",  $_POST['nameFirst']);
     $stmt->bindParam(":name_last", $_POST['nameLast']);
     $stmt->bindParam(":tracking_ID", $_POST['trackingID']);
