@@ -14,7 +14,7 @@ Demonstrates 2FA verification requirement until check out functionality exists.
 		$stmt->bindParam(":tid", $_POST["trackingID"]);
 		$stmt->execute();
 		$log = $stmt->fetch();
-		$verified = verify2FA($_POST['verify'], $log['log_date'], $log['tracking_ID']);
+		$verified = verify2FA($_POST['verify'], "2021-04-08 21:34:35", "TEST");
 		echo "2FA: {$_POST['verify']}";
 		echo "Verify: $verified";
 	}
