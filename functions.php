@@ -60,7 +60,7 @@ function dbConnect(){
  * Description:     Verifies the 2fa code
  * Return:          True if codes are the same false otherwise
  */
-function verify2fa($validate, $logdate, $trackId){
+function verify2fa($logdate, $trackId){
 $hash = substr(md5($logdate.$trackingId), 0, 8);
 return $hash;
 }

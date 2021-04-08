@@ -42,7 +42,7 @@ try{
 
 	$date = date('Y-m-d H:i:s');
     // Generate 8 character 2FA code from current timestamp
-    $hash = substr(md5($date.$_POST['trackingID']), 0, 8);
+    $hash = verify2fa($date, $_POST['trackingID']);
 	
 	// prepare sql and bind parameters	
 	$stmt = $conn->prepare("INSERT INTO PACKAGE (building, log_date, name_first, name_last, tracking_ID, 2FA) VALUES (:building, :date, :name_first, :name_last, :tracking_ID, :2FA)");
