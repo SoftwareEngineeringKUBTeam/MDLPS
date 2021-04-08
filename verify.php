@@ -8,7 +8,7 @@ Demonstrates 2FA verification requirement until check out functionality exists.
 -->
 <?php
 	include("functions.php");
-	if(ISSET($_POST["verify"] && ISSET($_POST["trackingID"]){
+	if(ISSET($_POST["verify"]) && ISSET($_POST["trackingID"])){
 		$conn = dbConnect();
 		$stmt = $conn->prepare("SELECT * FROM package WHERE tracking_ID = :tid");
 		$stmt->bindParam(":tid", $_POST["trackingID"]);
