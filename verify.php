@@ -41,7 +41,7 @@ Demonstrates 2FA verification requirement until check out functionality exists.
 			<?php
 			$conn = dbConnect();
 			foreach($conn->query("SELECT tracking_id FROM package") as $row){
-				echo "<option>{$row['tracking_id']}</option>"
+				echo "<option>{$row['tracking_id']}</option>";
 			}
 			?>
 		</select>
