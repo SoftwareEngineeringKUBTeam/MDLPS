@@ -2,6 +2,11 @@
 /*********************************    CHANGES   *********************************
     -20FEB2021 Nick Naylor: added notifyStudent function to send an email to the
                             student's email address
+    -27MAR2021 Nick Naylor: Added logout function.  Kills the session and 
+                            redirects back to the login page.
+                            Added checklogin function.  the pages will use this 
+                            to verify the user is logged in before they can access
+                            the page.
 
 *********************************************************************************/
 
@@ -41,12 +46,12 @@ function printTable($data) {
  */
 function dbConnect(){
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $server = $url["host"];
-    $username = $url["user"];
+	$server = $url["host"];
+	$username = $url["user"];
     $password = $url["pass"];
     $db = substr($url["path"] , 1);
 
-    $conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
+	$conn = new PDO("mysql:host=$server;dbname=$db", $username, $password);
     return $conn;
 }
 
@@ -59,7 +64,6 @@ function verify2fa($validate, $logdate, $trackId){
 $hash = substr(md5($logdate.$trackingId), 0, 8);
 return $hash;
 }
-
 
 /*
     Function Name:  notifyStudent
@@ -89,7 +93,7 @@ function notifyStudent($email, $trackID, $name, $validateCode) {
             <div id=\"text\" style='background: #701932; color: white; margin: 3em; padding-bottom: 3em; line-height: 3em auto;'>
                 <h2>{$name},</h2>
                 <p>You have a package with tracking number {$trackID} ready for pickup!</p>
-                <p>Your code is {$ValidateCode}.</p>`
+                <p>Your code is {$validateCode}.</p>`
             </div>
             
         </div>
@@ -103,5 +107,45 @@ function notifyStudent($email, $trackID, $name, $validateCode) {
     // send the message
     return mail($email, $subject, $message, $headers);
 } // END notifyStudent 
+
+/*
+    Function Name:  logout
+    Author:         Nick Naylor
+    Description:    This function is used to logout from the system.  
+                    It uses session_destroy and redirects back to the login page
+    Parameters:     N/A
+    Returns:        N/A - redirects back to login page
+*/
+function logout() {    
+
+    session_start(); //get session data
+    session_unset(); //unset session variables
+    session_destroy(); //destroy session data
+    session_write_close(); //overkill
+    session_regenerate_id(true); //replace the sesson id
+    header("Location: login.php"); //redirect to login page    
+    
+} // END logout function
+
+
+/*
+    Function Name:  checkLogin
+    Author:         Nick Naylor
+    Description:    This function is called on each access of a page to verify
+                    that the user is logged in.  checks $_SESSON["loggedin"]
+    Parameters:     N/A
+    Returns:        N/A
+*/
+function checkLogin() {
+    session_start();
+    
+    //make sure loggedin is set. if not, redirect to login.php
+    if(!isset($_SESSION["loggedin"])) {        
+        header("Location: login.php");
+        die(); //die
+    }// END if
+
+}// END checkLogin function
+
 
 ?>

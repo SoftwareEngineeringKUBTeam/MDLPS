@@ -1,9 +1,17 @@
 <!-- Chris Droney
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/22/2021
+Last Modified: 3/27/2021 - check for logged in session before continuing
 search.php
 MDLPS search page-->
+
+<!-- check if user is logged in, if not, redirect to login page -->
+<?php
+    session_start();
+    include("functions.php");
+    checkLogin();
+?>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -118,12 +126,13 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     list($name_first, $name_last) = explode(' ', $term);
 
     //Prepared statement
-    $select = "SELECT * FROM package WHERE `name_first` = ? AND `name_last` = ?";
+    $select = "SELECT * FROM package WHERE `name_first` = :name_first AND `name_last` = :name_last";
     $stmt = $conn->prepare($select);
 
     //Parameter Binding
     $category = $_GET['category'];
-    $stmt->bindParam($name_first, $name_last);
+    $stmt->bindParam(":name_first", $name_first);
+    $stmt->bindParam(":name_last", $name_last);
 
     $stmt->execute();
 

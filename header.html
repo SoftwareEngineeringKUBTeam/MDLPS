@@ -7,9 +7,9 @@ Header file for top of each page.-->
 
 <nav class="head">
 	<ul class="inlineList">
-		<li><a>Log in</a></li>
+		<li><a href="login.php">Log out</a></li>
     		<li><a href="index.php">Log Packages</a></li>
-    		<li><a>Check Out</a></li>
+    		<li><a href="verify.php">Check Out</a></li>
             <li><a href="search.php">Search Packages</a></li>
     	</ul>
     <ul class="inlineList">
@@ -19,8 +19,9 @@ Header file for top of each page.-->
         <li><a href="search.php">Search Packages</a></li>
 		<?php
 		$userinfo = $_SESSION["userInfo"];
+		if ($userinfo["accessLevel"] === "SYSADMIN"){
 			echo "<li><a href=\"admin.php\">Administrator</a></li>";
-			}
+		}
 		?>
     </ul>
     <!--Auto-logout Functionality; Number following "content" is the logout timer in seconds-->
