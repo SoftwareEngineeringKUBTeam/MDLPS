@@ -8,16 +8,6 @@ Demonstrates 2FA verification requirement until check out functionality exists.
 -->
 <?php
 	include("functions.php");
-	if(ISSET($_POST["verify"]) && ISSET($_POST["trackingID"])){
-		$conn = dbConnect();
-		$stmt = $conn->prepare("SELECT * FROM package WHERE tracking_ID = :tid");
-		$stmt->bindParam(":tid", $_POST["trackingID"]);
-		$stmt->execute();
-		$log = $stmt->fetch();
-		$verified = verify2FA($log['log_date'], $log['tracking_ID']);
-		echo "2FA: {$_POST['verify']}";
-		echo "Verify: $verified";
-	}
 ?>
 
 <html>
@@ -50,5 +40,17 @@ Demonstrates 2FA verification requirement until check out functionality exists.
             </form>
         </div>
     </div>
+	<?php
+	if(ISSET($_POST["verify"]) && ISSET($_POST["trackingID"])){
+		$conn = dbConnect();
+		$stmt = $conn->prepare("SELECT * FROM package WHERE tracking_ID = :tid");
+		$stmt->bindParam(":tid", $_POST["trackingID"]);
+		$stmt->execute();
+		$log = $stmt->fetch();
+		$verified = verify2FA($log['log_date'], $log['tracking_ID']);
+		echo "2FA Code: {$_POST['verify']} <br>";
+		echo "Generated Code: $verified";
+	}
+	?>
 </body>
 </html>
