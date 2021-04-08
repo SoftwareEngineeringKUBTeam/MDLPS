@@ -66,6 +66,14 @@ h1, h2, h3{
     background-color: #701932;
     text-align: center;
 }
+.createhead{
+    width: 33%;
+    height: 5em;
+    line-height: 5em;
+    margin: 10em auto .5em auto;
+    background-color: #701932;
+    text-align: center;
+}
 
 input{
     display: block;
