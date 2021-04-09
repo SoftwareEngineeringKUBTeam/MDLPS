@@ -17,7 +17,7 @@ Demonstrates 2FA verification requirement until check out functionality exists.
     <link rel='stylesheet' type='text/css' href='style.css'>
 </head>
 <body>
-<?php require_once("header.html"); ?>
+<?php require_once("header.php"); ?>
 	<div class="log">
         <!-- Form header -->
         <div class="loghead">
