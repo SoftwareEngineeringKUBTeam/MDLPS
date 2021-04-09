@@ -20,7 +20,7 @@ MDLPS main page-->
 </head>
 <body>
     <!-- Load header file -->
-    <?php require_once('./header.html'); ?>
+    <?php require_once('./header.php'); ?>
 
     <!-- Container div for entirety of package logging -->
     <div class="log">
