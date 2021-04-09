@@ -52,7 +52,7 @@ MDLPS search page-->
 <body>
 <?php
 //include header
-require_once("header.html");
+require_once("header.php");
 //superglobals for collecting form data
 $s_tracking = isset($_GET['category']) && $_GET['category'] === 'tracking_ID';
 $s_sname = isset($_GET['category']) && $_GET['category'] === 'Student Name';
