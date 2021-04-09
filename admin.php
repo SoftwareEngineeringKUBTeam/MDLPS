@@ -28,7 +28,7 @@ MDLPS search page-->
 <body>
 
 <?php //include header 
-require_once("header.html");?>
+require_once("header.php");?>
 <div class="create user">
         <!-- Log section's header -->
     <div class="createhead">
