@@ -106,9 +106,10 @@ catch(PDOException $e) {
                 <?php if(isset($invalid)){echo $invalid;} ?> 
             </div>
         </div>
-    </div>
     <p>Forgot Password?</p>
     <a href= google.com>Click Here</a>
+    </div>
+    
 </body>
 </html>
 
