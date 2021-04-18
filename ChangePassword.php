@@ -11,7 +11,17 @@ ChangePassword.php -->
     session_start();
     include("functions.php");
     checkLogin();
-
+    if (ISSET($_POST["oldPassword"])&& ISSET($_POST["newPassword"]){
+     $conn = dbConnect();
+     $query = "UPDATE logininfo SET pass = :pass WHERE user = :user AND pass = :oldpass";
+     $oldhash = password_hash($_POST['oldPassword'], PASSWORD_DEFAULT);
+     $newhash = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+     $stmt = $conn -> prepare($query);
+     $stmt->bindParam(":user", $_SESSION['loggedin']);
+     $stmt->bindParam(":oldpass", $oldhash);
+     $stmt->bindParam(":pass", $newhash);
+     $stmt-> execute();
+     }
 ?>
 	
 <html>
@@ -34,7 +44,7 @@ ChangePassword.php -->
 
         <!--password form-->
         <div class="forms">
-            <form method="POST" action="print.php">
+            <form method="POST" action="#">
                 <input type="password" name="oldPassword" placeholder="Old Password" required autofocus>
                 <input type="password" name="newPassword" placeholder="New Password" required>
                 <input type="submit" value="Submit">
