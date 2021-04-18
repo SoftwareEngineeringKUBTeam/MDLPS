@@ -106,8 +106,6 @@ catch(PDOException $e) {
                 <?php if(isset($invalid)){echo $invalid;} ?> 
             </div>
         </div>
-    <p>Forgot Password?</p>
-    <a href= "ChangePassword.php">Click Here</a>
     </div>
     
 </body>
