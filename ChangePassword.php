@@ -11,7 +11,7 @@ ChangePassword.php -->
     session_start();
     include("functions.php");
     checkLogin();
-    if (ISSET($_POST["oldPassword"])&& ISSET($_POST["newPassword"]){
+    if (ISSET($_POST["oldPassword"])&& ISSET($_POST["newPassword"])){
      $conn = dbConnect();
      $query = "UPDATE logininfo SET pass = :pass WHERE user = :user AND pass = :oldpass";
      $oldhash = password_hash($_POST['oldPassword'], PASSWORD_DEFAULT);
