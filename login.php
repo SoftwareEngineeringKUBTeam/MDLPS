@@ -107,7 +107,7 @@ catch(PDOException $e) {
             </div>
         </div>
     <p>Forgot Password?</p>
-    <a href= google.com>Click Here</a>
+    <a href= "ChangePassword.php">Click Here</a>
     </div>
     
 </body>
