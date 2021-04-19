@@ -75,13 +75,15 @@ report.php
                     <option value="npu">Package Not Picked Up</option>
                     <option value="pu">Package Picked Up</option>
                 </select>
-                <div>
-                    <p>Which buildings would you like to include on the report?</p>
-                    <div><label> 1<input type="checkbox" id="bldg1" name="bldg1" value="Building 1" checked></label></div>
-                    <div class="line"><label> 2<input type="checkbox" id="bldg2" name="bldg2" value="Building 2" checked></label></div>
-                    <div class="line"><label> 3<input type="checkbox" id="bldg3" name="bldg3" value="Building 3" checked></label></div>
-                    <div class="line"><label> 4<input type="checkbox" id="bldg4" name="bldg4" value="Building 4" checked></label></div>
+                
+                <p>Which buildings would you like to include on the report?</p>
+                <div class="line">                    
+                    <label>1<input type="checkbox" id="bldg1" name="bldg1" value="Building 1" checked></label>
+                    <label>2<input type="checkbox" id="bldg2" name="bldg2" value="Building 2" checked></label>
+                    <label>3<input type="checkbox" id="bldg3" name="bldg3" value="Building 3" checked></label>
+                    <label>4<input type="checkbox" id="bldg4" name="bldg4" value="Building 4" checked></label>
                 </div>
+
                 <input type="submit" value="Generate">
                 <input type="reset" value="Clear Form">
             </form>
