@@ -94,7 +94,12 @@ echo "<div class=\"results\">";
 
 if (isset($_POST['package_ID']))
 {
+
+print "<h3>2FA Code for Package #";
 print($_POST['package_ID']);
+print "</h3>";
+
+
 }
 
 
