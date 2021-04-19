@@ -92,9 +92,9 @@ $conn = dbConnect();
 //container for styling search result table
 echo "<div class=\"results\">";
 
-if (isset($_POST['rows']))
+if (isset($_POST['package_ID']))
 {
-print_r($_POST['rows']);
+print_r($_POST['package_ID']);
 }
 
 
