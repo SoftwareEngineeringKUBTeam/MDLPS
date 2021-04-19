@@ -92,7 +92,10 @@ $conn = dbConnect();
 //container for styling search result table
 echo "<div class=\"results\">";
 
-
+if(isset($_POST["post_ID"]))
+{
+    $_POST['package_ID'] = $_POST["post_ID"];
+}
 
 if (isset($_POST['package_ID']))
 {
@@ -105,7 +108,7 @@ if (isset($_POST['package_ID']))
 
     print"<div class=\"forms\">";
         print"<form method=\"post\" action='#'>";
-            print "<input type=\"hidden\" name=\"post_ID\" value = $stored_ID>";
+            print"<input type=\"hidden\" name=\"post_ID\" value = $stored_ID>";
             print"<input type=\"text\" name=\"verify\" placeholder=\"2FA Code\" required>";
             print"<input type=\"submit\" value=\"Submit\">";
 		    print"<input class=\"line\" type=\"reset\" value=\"Clear Form\">";
