@@ -130,7 +130,13 @@ if (isset($_POST['package_ID']))
 
             if($input_code == $verified)
             {
+                $date = date('Y-m-d H:i:s');
                 print"good!";
+                $query = "UPDATE package SET sign_date = :sdate WHERE ID = :pid";
+                $stmt = $conn -> prepare($query);
+                $stmt->bindParam(":sdate", $date);
+                $stmt->bindParam(":pid", $_POST["post_ID"]);
+                $stmt-> execute();
             }
 	}
 
