@@ -94,30 +94,40 @@ echo "<div class=\"results\">";
 
 if (isset($_POST['package_ID']))
 {
-
-print "<h3>2FA Code for Package #";
-    print($_POST['package_ID']);
-print "</h3>";
-
-print"<div class=\"forms\">";
-    print"<form method=\"post\" action='#'>";
-        print"<input type=\"text\" name=\"verify\" placeholder=\"2FA Code\" required>";
-        print"<input type=\"submit\" value=\"Submit\">";
-		print"<input class=\"line\" type=\"reset\" value=\"Clear Form\">";
-    print"</form>";
-print"</div>";
+    $stored_ID = $_POST['package_ID'];
+}
 
 
 
-if(ISSET($_POST["verify"]) && ISSET($_POST["package_ID"])){
-		$conn = dbConnect();
-		$stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
-		$stmt->bindParam(":pid", $_POST["package_ID"]);
-		$stmt->execute();
-		$log = $stmt->fetch();
-		$verified = verify2FA($log['log_date'], $log['tracking_ID']);
-		echo "2FA Code: {$_POST['verify']} <br>";
-		echo "Generated Code: $verified";
+if (isset($stored_ID))
+{
+
+    print "<h3>2FA Code for Package #";
+        print($_POST['package_ID']);
+    print "</h3>";
+
+    
+
+    print"<div class=\"forms\">";
+        print"<form method=\"post\" action='#'>";
+            print"<input type=\"text\" name=\"verify\" placeholder=\"2FA Code\" required>";
+            print"<input type=\"submit\" value=\"Submit\">";
+		    print"<input class=\"line\" type=\"reset\" value=\"Clear Form\">";
+        print"</form>";
+    print"</div>";
+
+
+
+    if(ISSET($_POST["verify"]) && ISSET($stored_ID))
+    {
+		    $conn = dbConnect();
+		    $stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
+		    $stmt->bindParam(":pid", $stored_ID);
+		    $stmt->execute();
+		    $log = $stmt->fetch();
+		    $verified = verify2FA($log['log_date'], $log['tracking_ID']);
+		    echo "2FA Code: {$_POST['verify']} <br>";
+		    echo "Generated Code: $verified";
 	}
 
 
