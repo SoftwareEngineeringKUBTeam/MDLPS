@@ -63,7 +63,7 @@ function printPackageTable($data) {
 
         print "<td>";
         print "<form action='#' method='post'>";
-        print "<input type=\"hidden\" name=\"package_ID\" value = $form_value>";
+        print "<input type=\"hidden\" name=\"package_ID\" value = $record>";
         print "<input type=\"submit\" value =\"Check Out\"> </form></td>";
         foreach ($values as $v) {
             print "<td>$v</td>";
