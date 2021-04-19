@@ -39,6 +39,47 @@ function printTable($data) {
     print "</table>";
 }
 
+/* Function Name: printPackageTable
+ * Author:        Chris Droney
+ * Description:   prints an HTML table with a submit form based on data from the MySQL database
+ * Parameters:    (string) $data: the array of sql data being passed to the function
+ */
+
+function printPackageTable($data) {
+    if (count($data) === 0) {
+        return;
+    }
+    $header = array_keys($data[0]);
+    print "<table>\n";
+    print "<tr>";
+    print "<th>Check Out</th>";
+    foreach ($header as $h) {
+        print "<th>$h</th>";
+    }
+    print "</tr>\n";
+    foreach ($data as $record) {
+        $values = array_values($record);
+        $form_value = implode(',', $values);
+        $value_arr = explode(',', $form_value);
+
+
+        print "<tr>";
+
+        print "<td>";
+        print "<form action='#' method='post'>";
+        print "<input type=\"hidden\" name=\"package_ID\" value = $value_arr[0]>";
+        print "<input type=\"submit\" value =\"Check Out\"> </form></td>";
+        foreach ($values as $v) {
+            print "<td>$v</td>";
+        }
+        print "</tr>\n";
+    }
+    print "</table>";
+}
+
+
+
+
 /* Function Name:   dbConnect
  * Author:          Hunter DeBlase
  * Description:     Connects to the database in the environment variable CLEARDB_DATABASE_URL

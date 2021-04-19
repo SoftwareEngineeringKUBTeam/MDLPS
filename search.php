@@ -1,7 +1,7 @@
 <!-- Chris Droney
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/27/2021 - check for logged in session before continuing
+Last Modified: 4/19/2021 - check out functionality added
 search.php
 MDLPS search page-->
 
@@ -92,6 +92,68 @@ $conn = dbConnect();
 //container for styling search result table
 echo "<div class=\"results\">";
 
+//Keeping package_ID stored through the 2FA form's refresh action'
+if(isset($_POST["post_ID"]))
+{
+    $_POST['package_ID'] = $_POST["post_ID"];
+}
+
+if (isset($_POST['package_ID']))
+{
+
+    print "<h3>2FA Code for Package #";
+        print($_POST['package_ID']);
+    print "</h3>";
+
+
+    $stored_ID = $_POST['package_ID'];
+    
+    //form for entering 2FA code
+    print"<div class=\"forms\">";
+        print"<form method=\"post\" action='#'>";
+            print"<input type=\"hidden\" name=\"post_ID\" value = $stored_ID>";
+            print"<input type=\"text\" name=\"verify\" placeholder=\"2FA Code\" required>";
+            print"<input type=\"submit\" value=\"Submit\">";
+		    print"<input class=\"line\" type=\"reset\" value=\"Clear Form\">";
+        print"</form>";
+    print"</div>";
+
+
+    //if 2FA code has been entered, and post_ID is set
+    if(ISSET($_POST["verify"]) && ISSET($_POST["post_ID"]))
+    {
+		    //Verification
+            $conn = dbConnect();
+		    $stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
+		    $stmt->bindParam(":pid", $_POST["post_ID"]);
+		    $stmt->execute();
+		    $log = $stmt->fetch();
+		    $verified = verify2FA($log['log_date'], $log['tracking_ID']);
+		    $input_code = $_POST['verify'];
+
+            //if verification successful, set the check-out date accordingly, and clear the saved post_ID
+            if($input_code == $verified)
+            {
+                $date = date('Y-m-d H:i:s');
+                print"<h4>Verification Successful. Package has been Checked-Out</h4>";
+                $query = "UPDATE package SET sign_date = :sdate WHERE ID = :pid";
+                $stmt = $conn -> prepare($query);
+                $stmt->bindParam(":sdate", $date);
+                $stmt->bindParam(":pid", $_POST["post_ID"]);
+                $stmt-> execute();
+                unset($_POST["post_ID"]);
+            }
+            //if verification unsuccessful, print error message and continue.
+            if($input_code != $verified)
+            {
+                 print"<h4>Verification failed. Please re-enter 2FA code.</h4>";
+            }
+	}
+
+
+}
+
+
 //checking if category & term are set, and 'building' is the selected category
 if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET['term']))
 {
@@ -108,11 +170,11 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
     $stmt->execute();
 
     //debug
-    print "<h3>Reports where $category =  $term</h3>";
+    //print "<h3>Reports where $category =  $term</h3>";
 
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printTable($records);
+    printPackageTable($records);
     
     //closing the css container
     echo "</div>";
@@ -137,11 +199,11 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     $stmt->execute();
 
     //debug
-    print "<h3>Reports where $category =  $term</h3>";
+    //print "<h3>Reports where $category =  $term</h3>";
 
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printTable($records);
+    printPackageTable($records);
     
     //closing the css containter
     echo "</div>";
@@ -162,11 +224,11 @@ if (isset($_GET['category']) && ($_GET['category'] == 'tracking_ID') && isset($_
     $stmt->execute();
 
     //debug
-    print "<h3>Reports where $category =  $term</h3>";
+    //print "<h3>Reports where $category =  $term</h3>";
     
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printTable($records);
+    printPackageTable($records);
         
     //closing the css containter
     echo "</div>";
