@@ -122,6 +122,14 @@ if (isset($_POST['package_ID']))
     //if 2FA code has been entered, and post_ID is set
     if(ISSET($_POST["verify"]) && ISSET($_POST["post_ID"]))
     {
+        $conn = dbConnect();
+		$stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
+		$stmt->bindParam(":pid", $_POST["post_ID"]);
+		$stmt->execute();
+        $log = $stmt->fetch();
+
+        if(!(ISSET($log['sign_date'])))
+        {
 		    //Verification
             $conn = dbConnect();
 		    $stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
@@ -148,6 +156,13 @@ if (isset($_POST['package_ID']))
             {
                  print"<h4>Verification failed. Please re-enter 2FA code.</h4>";
             }
+        }
+        else
+        {
+            print"<script type=\"text/javascript\">";
+            print"window.alert(\"The selected package has already been checked-out.\")";
+            print"</script>";
+        }
 	}
 
 
