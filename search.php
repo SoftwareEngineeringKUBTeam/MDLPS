@@ -112,7 +112,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
 
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printTable($records);
+    printFormTable($records);
     
     //closing the css container
     echo "</div>";

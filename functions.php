@@ -39,6 +39,39 @@ function printTable($data) {
     print "</table>";
 }
 
+/* Function Name: printFormTable
+ * Description: prints an HTML table with a checkbox form based on data from the sqlite3 database
+ * Parameters: (string) $data: the array of sql data being passed to the function
+ */
+
+function printFormTable($data) {
+    if (count($data) === 0) {
+        return;
+    }
+    $header = array_keys($data[0]);
+    print "<table>\n";
+    print "<tr>";
+    print "<th>Select</th>";
+    foreach ($header as $h) {
+        print "<th>$h</th>";
+    }
+    print "</tr>\n";
+    foreach ($data as $record) {
+        $values = array_values($record);
+        $form_value = implode(',', $values);
+        print "<tr>";
+        print "<td><input type=\"checkbox\" name=\"rows[]\" value=\"$form_value\"></td>";
+        foreach ($values as $v) {
+            print "<td>$v</td>";
+        }
+        print "</tr>\n";
+    }
+    print "</table>";
+}
+
+
+
+
 /* Function Name:   dbConnect
  * Author:          Hunter DeBlase
  * Description:     Connects to the database in the environment variable CLEARDB_DATABASE_URL
