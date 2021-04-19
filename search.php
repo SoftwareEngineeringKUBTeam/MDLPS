@@ -1,7 +1,7 @@
 <!-- Chris Droney
 Mail Delivery Logging and Processing System
 Creation Date: 2/19/2021
-Last Modified: 3/27/2021 - check for logged in session before continuing
+Last Modified: 4/19/2021 - check out functionality added
 search.php
 MDLPS search page-->
 
