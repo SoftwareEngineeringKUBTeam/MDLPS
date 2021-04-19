@@ -51,7 +51,7 @@ function printFormTable($data) {
     $header = array_keys($data[0]);
     print "<table>\n";
     print "<tr>";
-    print "<th>Select</th>";
+    print "<th>Check Out</th>";
     foreach ($header as $h) {
         print "<th>$h</th>";
     }
