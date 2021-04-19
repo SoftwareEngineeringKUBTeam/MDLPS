@@ -39,12 +39,12 @@ function printTable($data) {
     print "</table>";
 }
 
-/* Function Name: printFormTable
- * Description: prints an HTML table with a checkbox form based on data from the MySQL database
+/* Function Name: printPackageTable
+ * Description: prints an HTML table with a submit form based on data from the MySQL database
  * Parameters: (string) $data: the array of sql data being passed to the function
  */
 
-function printFormTable($data) {
+function printPackageTable($data) {
     if (count($data) === 0) {
         return;
     }
@@ -60,8 +60,11 @@ function printFormTable($data) {
         $values = array_values($record);
         $form_value = implode(',', $values);
         print "<tr>";
+
+        print "<td>";
+        print "<form action='#' method='post'>";
         print "<input type=\"hidden\" name=\"package_ID\" value = $form_value>";
-        print "<td><input type=\"submit\" value =\"Check Out\"></td>";
+        print "<input type=\"submit\" value =\"Check Out\"> </form></td>";
         foreach ($values as $v) {
             print "<td>$v</td>";
         }

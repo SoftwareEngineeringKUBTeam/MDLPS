@@ -94,7 +94,7 @@ echo "<div class=\"results\">";
 
 if (isset($_POST['package_ID']))
 {
-print_r($_POST['package_ID']);
+print($_POST['package_ID']);
 }
 
 
@@ -118,7 +118,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
 
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printFormTable($records);
+    printPackageTable($records);
     
     //closing the css container
     echo "</div>";
