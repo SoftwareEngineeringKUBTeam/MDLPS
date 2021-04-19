@@ -59,11 +59,14 @@ function printPackageTable($data) {
     foreach ($data as $record) {
         $values = array_values($record);
         $form_value = implode(',', $values);
+        $value_arr = explode(',', $form_value);
+
+
         print "<tr>";
 
         print "<td>";
         print "<form action='#' method='post'>";
-        print "<input type=\"hidden\" name=\"package_ID\" value = $form_value>";
+        print "<input type=\"hidden\" name=\"package_ID\" value = $value_arr[0]>";
         print "<input type=\"submit\" value =\"Check Out\"> </form></td>";
         foreach ($values as $v) {
             print "<td>$v</td>";
