@@ -21,7 +21,7 @@ report.php
             $dFrom = $_POST["dFrom"];
             $dTo = $_POST["dTo"];
 
-            if (strtotime($dFrom) < strtotime($dTo))  {
+            if (strtotime($dFrom) <= strtotime($dTo))  {
                 //query
                 $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo");
                 $search = $conn->prepare($sql);
@@ -30,9 +30,11 @@ report.php
                 $search->bindParam(":dTo", $dTo);
 
                 $search->execute();
+
+                print "<h3>Report: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
-                die();
+                
             }
             else {
                 $invalid = "Start date should be before end date.";
