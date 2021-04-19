@@ -125,8 +125,13 @@ if (isset($_POST['package_ID']))
 		    $stmt->execute();
 		    $log = $stmt->fetch();
 		    $verified = verify2FA($log['log_date'], $log['tracking_ID']);
-		    echo "2FA Code: {$_POST['verify']} <br>";
-		    echo "Generated Code: $verified";
+		    $input_code = $_POST['verify'];
+		    //$generated_code = $verified;
+
+            if($input_code == $verified)
+            {
+                print"good!";
+            }
 	}
 
 
