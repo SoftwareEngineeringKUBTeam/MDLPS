@@ -18,8 +18,8 @@ report.php
         }// END if 
 
         if(isset($_POST["dFrom"]) && isset($_POST["dTo"])) {
-            $dFrom = $_POST["dFrom"];
-            $dTo = $_POST["dTo"];
+            $dFrom = $_POST["dFrom"] . " 00:00:00";
+            $dTo = $_POST["dTo"] . " 23:59:59";
 
             if (strtotime($dFrom) <= strtotime($dTo))  {
                 //query
@@ -77,10 +77,10 @@ report.php
                 </select>
                 <div>
                     <p>Which buildings would you like to include on the report?</p>
-                    <label>1<input class="line" type="checkbox" id="bldg1" name="bldg1" value="Building 1" checked></label>
-                    <label>2<input class="line" type="checkbox" id="bldg2" name="bldg2" value="Building 2" checked></label>
-                    <label>3<input class="line" type="checkbox" id="bldg3" name="bldg3" value="Building 3" checked></label>
-                    <label>4<input class="line" type="checkbox" id="bldg4" name="bldg4" value="Building 4" checked></label>
+                    <label> 1<input class="line" type="checkbox" id="bldg1" name="bldg1" value="Building 1" checked></label>
+                    <label> 2<input class="line" type="checkbox" id="bldg2" name="bldg2" value="Building 2" checked></label>
+                    <label> 3<input class="line" type="checkbox" id="bldg3" name="bldg3" value="Building 3" checked></label>
+                    <label> 4<input class="line" type="checkbox" id="bldg4" name="bldg4" value="Building 4" checked></label>
                 </div>
                 <input type="submit" value="Generate">
                 <input type="reset" value="Clear Form">
