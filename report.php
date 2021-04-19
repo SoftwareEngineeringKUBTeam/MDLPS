@@ -17,10 +17,10 @@ report.php
             die("error: couldn't connect to database");
         }// END if 
 
- /*       if(isset($_POST["dFrom"])) && isset($_POST["dTo"])) {
+        if(isset($_POST["dFrom"])) && isset($_POST["dTo"])) {
             if ($_POST["dFrom"] <= $_POST["dTo"])  {
                 //query
-                $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo");
+               /* $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo");
                 $search = $conn->prepare($sql);
 
                 $dFrom = $_POST["dFrom"];
@@ -32,12 +32,12 @@ report.php
                 $search->execute();
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
-                die();
+                die();*/
             }
             else {
                 $invalid = "Start date should be before end date.";
             }
-        } */
+        } 
     }// END try
     catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
