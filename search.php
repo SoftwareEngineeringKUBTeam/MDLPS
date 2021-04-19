@@ -94,7 +94,7 @@ echo "<div class=\"results\">";
 
 if (isset($_POST['rows']))
 {
-print "<h3>test succesful</h3>";
+print_r($_POST['rows']);
 }
 
 
