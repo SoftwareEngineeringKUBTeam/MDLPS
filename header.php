@@ -9,8 +9,7 @@ Header file for top of each page.-->
     <ul class="inlineList">
         <li><a href="login.php">Log Out</a></li>
         <li><a href="index.php">Log Packages</a></li>
-        <li><a href="verify.php">Check Out</a></li>
-        <li><a href="search.php">Search Packages</a></li>
+        <li><a href="search.php">Search & Check-Out Packages</a></li>
 		<?php
 		$userinfo = $_SESSION["userInfo"];
 		if ($userinfo["accessLevel"] === "SYSADMIN"){

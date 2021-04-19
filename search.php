@@ -170,7 +170,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
     $stmt->execute();
 
     //debug
-    print "<h3>Reports where $category =  $term</h3>";
+    //print "<h3>Reports where $category =  $term</h3>";
 
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -199,11 +199,11 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     $stmt->execute();
 
     //debug
-    print "<h3>Reports where $category =  $term</h3>";
+    //print "<h3>Reports where $category =  $term</h3>";
 
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printTable($records);
+    printPackageTable($records);
     
     //closing the css containter
     echo "</div>";
@@ -224,11 +224,11 @@ if (isset($_GET['category']) && ($_GET['category'] == 'tracking_ID') && isset($_
     $stmt->execute();
 
     //debug
-    print "<h3>Reports where $category =  $term</h3>";
+    //print "<h3>Reports where $category =  $term</h3>";
     
     //Printing Table
     $records = $stmt->fetchall(PDO::FETCH_ASSOC);
-    printTable($records);
+    printPackageTable($records);
         
     //closing the css containter
     echo "</div>";
