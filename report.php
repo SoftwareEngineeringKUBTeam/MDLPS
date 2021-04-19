@@ -21,11 +21,11 @@ report.php
             $dFrom = $_POST["dFrom"];
             $dTo = $_POST["dTo"];
 
-            if (strtotime($dFrom) <= strtotime($dTo))  {
+            if (strtotime($dFrom) < strtotime($dTo))  {
                 //query
                 $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo");
                 $search = $conn->prepare($sql);
-                
+
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
 
