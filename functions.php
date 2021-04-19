@@ -40,7 +40,7 @@ function printTable($data) {
 }
 
 /* Function Name: printFormTable
- * Description: prints an HTML table with a checkbox form based on data from the sqlite3 database
+ * Description: prints an HTML table with a checkbox form based on data from the MySQL database
  * Parameters: (string) $data: the array of sql data being passed to the function
  */
 

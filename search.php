@@ -92,6 +92,12 @@ $conn = dbConnect();
 //container for styling search result table
 echo "<div class=\"results\">";
 
+if (isset($_POST['rows']))
+{
+print "<h3>test succesful</h3>";
+}
+
+
 //checking if category & term are set, and 'building' is the selected category
 if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET['term']))
 {
