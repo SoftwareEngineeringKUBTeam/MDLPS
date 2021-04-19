@@ -96,8 +96,16 @@ if (isset($_POST['package_ID']))
 {
 
 print "<h3>2FA Code for Package #";
-print($_POST['package_ID']);
+    print($_POST['package_ID']);
 print "</h3>";
+
+print"<div class=\"forms\">";
+    print"<form method=\"post\" action='#'>";
+        print"<input type=\"text\" name=\"verify\" placeholder=\"2FA Code\" required>";
+        print"<input type=\"submit\" value=\"Submit\">";
+		print"<input class=\"line\" type=\"reset\" value=\"Clear Form\">";
+    print"</form>";
+print"</div>";
 
 
 }
