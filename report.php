@@ -27,7 +27,7 @@ report.php
                 $dTo = $_POST["dTo"];
 
                 $search->bindParam(':dFrom', $dFrom);
-                $search-bindParam(":dTo", $dTo);
+                $search->bindParam(":dTo", $dTo);
 
                 $search->execute();
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ report.php
         }
     }// END try
     catch(PDOException $e) {
-        echo "Error: " . $e.getMessage();
+        echo "Error: " . $e->getMessage();
     }// END catch
     $conn = null;
 
@@ -50,7 +50,7 @@ report.php
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Generage A Report</title>
+    <title>Generate A Report</title>
     <link rel='stylesheet' type='text/css' href='style.css'>
 </head>
 <body>

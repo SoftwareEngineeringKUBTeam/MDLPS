@@ -12,7 +12,7 @@ Header file for top of each page.-->
         <li><a href="verify.php">Check Out</a></li>
         <li><a href="search.php">Search Packages</a></li>
         <li><a href="ChangePassword.php">Change Password</a></li>
-        <li><a href="report.php">Generage Report</a></li>
+        <li><a href="report.php">Generate Report</a></li>
 		<?php
 		$userinfo = $_SESSION["userInfo"];
 		if ($userinfo["accessLevel"] === "SYSADMIN"){
