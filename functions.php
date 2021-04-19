@@ -60,7 +60,7 @@ function printFormTable($data) {
         $values = array_values($record);
         $form_value = implode(',', $values);
         print "<tr>";
-        print "<td><input type=\"checkbox\" name=\"rows[]\" value=\"$form_value\"></td>";
+        print "<td><input type="submit" value ="Check Out"></td>";
         foreach ($values as $v) {
             print "<td>$v</td>";
         }
