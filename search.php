@@ -92,7 +92,7 @@ $conn = dbConnect();
 //container for styling search result table
 echo "<div class=\"results\">";
 
-if (isset($_POST['package_ID']))
+if (isset($_POST['package_ID']) && ($_POST['package_ID'] != ""))
 {
     $stored_ID = $_POST['package_ID'];
 }
