@@ -92,24 +92,20 @@ $conn = dbConnect();
 //container for styling search result table
 echo "<div class=\"results\">";
 
-if (isset($_POST['package_ID']) && ($_POST['package_ID'] != ""))
-{
-    $stored_ID = $_POST['package_ID'];
-}
-print $stored_ID;
 
 
-if (isset($stored_ID))
+if (isset($_POST['package_ID']))
 {
 
     print "<h3>2FA Code for Package #";
         print($_POST['package_ID']);
     print "</h3>";
-
+    $stored_ID = $_POST['package_ID'];
     
 
     print"<div class=\"forms\">";
         print"<form method=\"post\" action='#'>";
+            print "<input type=\"hidden\" name=\"post_ID\" value = $stored_ID>";
             print"<input type=\"text\" name=\"verify\" placeholder=\"2FA Code\" required>";
             print"<input type=\"submit\" value=\"Submit\">";
 		    print"<input class=\"line\" type=\"reset\" value=\"Clear Form\">";
@@ -118,11 +114,11 @@ if (isset($stored_ID))
 
 
 
-    if(ISSET($_POST["verify"]) && ISSET($stored_ID))
+    if(ISSET($_POST["verify"]) && ISSET($_POST["post_ID"]))
     {
 		    $conn = dbConnect();
 		    $stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
-		    $stmt->bindParam(":pid", $stored_ID);
+		    $stmt->bindParam(":pid", $_POST["post_ID"]);
 		    $stmt->execute();
 		    $log = $stmt->fetch();
 		    $verified = verify2FA($log['log_date'], $log['tracking_ID']);
