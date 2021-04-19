@@ -96,7 +96,7 @@ if (isset($_POST['package_ID']))
 {
     $stored_ID = $_POST['package_ID'];
 }
-
+print $stored_ID;
 
 
 if (isset($stored_ID))
