@@ -17,7 +17,7 @@ report.php
             die("error: couldn't connect to database");
         }// END if 
 
-        if(isset($_POST["dFrom"])) && isset($_POST["dTo"])) {
+ /*       if(isset($_POST["dFrom"])) && isset($_POST["dTo"])) {
             if ($_POST["dFrom"] <= $_POST["dTo"])  {
                 //query
                 $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo");
@@ -37,7 +37,7 @@ report.php
             else {
                 $invalid = "Start date should be before end date.";
             }
-        }
+        } */
     }// END try
     catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
