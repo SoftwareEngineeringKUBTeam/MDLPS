@@ -108,6 +108,19 @@ print"<div class=\"forms\">";
 print"</div>";
 
 
+
+if(ISSET($_POST["verify"]) && ISSET($_POST["package_ID"])){
+		$conn = dbConnect();
+		$stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
+		$stmt->bindParam(":pid", $_POST["package_ID"]);
+		$stmt->execute();
+		$log = $stmt->fetch();
+		$verified = verify2FA($log['log_date'], $log['tracking_ID']);
+		echo "2FA Code: {$_POST['verify']} <br>";
+		echo "Generated Code: $verified";
+	}
+
+
 }
 
 
