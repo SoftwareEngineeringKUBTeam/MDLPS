@@ -17,7 +17,7 @@ report.php
             die("error: couldn't connect to database");
         }// END if 
 
-        if(isset($_POST["dFrom"])) && isset($_POST["dTo"])) {
+        if(isset($_POST["dFrom"]) && isset($_POST["dTo"])) {
             $dFrom = $_POST["dFrom"];
             $dTo = $_POST["dTo"];
 
