@@ -40,8 +40,9 @@ function printTable($data) {
 }
 
 /* Function Name: printPackageTable
- * Description: prints an HTML table with a submit form based on data from the MySQL database
- * Parameters: (string) $data: the array of sql data being passed to the function
+ * Author:        Chris Droney
+ * Description:   prints an HTML table with a submit form based on data from the MySQL database
+ * Parameters:    (string) $data: the array of sql data being passed to the function
  */
 
 function printPackageTable($data) {
