@@ -128,7 +128,7 @@ if (isset($_POST['package_ID']))
 		$stmt->execute();
         $log = $stmt->fetch();
 
-        if(ISSET($log['sign_date']))
+        if(!(ISSET($log['sign_date'])))
         {
 		    //Verification
             $conn = dbConnect();
