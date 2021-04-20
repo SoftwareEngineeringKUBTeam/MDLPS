@@ -9,6 +9,95 @@ report.php
     session_start();
     include("functions.php");
     checkLogin();
+?>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Generate A Report</title>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+
+    <!-- page specific styling -->
+    <style>
+        label{
+            display: inline-block;
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        tr:nth-child(even) {
+            background-color: #922040;
+        }
+
+        th, td {
+            text-align: center;
+        }
+
+        th {
+            color: white;
+            font-size: 30px;
+            text-transform: capitalize;
+        }
+
+        td {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            color: white
+        }
+    </style>
+</head>
+<body>
+<div class="log">
+        <div class="createhead">
+            <h2>Generate a Report</h2>
+        </div>
+
+        <div class="forms">
+            <form method="post" action="report.php">
+                <label>Range start:<input type="date" name="dFrom" placeholder="MM/DD/YYYY" required autofocus></label>
+                <label>Range end:<input type="date" name="dTo" placeholder="MM/DD/YYYY" required></label>
+                <p>Package Pickup Status</p>
+                <select type="text" name="PUstatus">
+                    <option value="all">All</option>
+                    <option value="npu">Package Not Picked Up</option>
+                    <option value="pu">Package Picked Up</option>
+                </select>
+                
+                <div>
+                    <p>Which buildings would you like to include on the report?</p>
+                    <label>
+                        1
+                        <input type="checkbox" id="bldg1" name="bldg1" value="Building 1" checked>
+                    </label>                    
+                    <label>
+                        2
+                        <input type="checkbox" id="bldg2" name="bldg2" value="Building 2" checked>
+                    </label>                    
+                    <label>
+                        3
+                        <input type="checkbox" id="bldg3" name="bldg3" value="Building 3" checked>
+                    </label>
+                    <label>
+                        4
+                        <input type="checkbox" id="bldg4" name="bldg4" value="Building 4" checked>
+                    </label>
+                </div>
+                <br>
+                <input type="submit" value="Generate">
+                <input type="reset" value="Clear Form">
+            </form>
+            <div style="font-size:12px; color:red; margin-top:10px">
+                <?php if(isset($invalid)){echo $invalid;}?>
+            </div>
+        </div>
+    </div>
+
+<?php
+    require_once("header.php");
 
     try {
         $conn = dbConnect();
@@ -92,7 +181,7 @@ report.php
                 $search->execute();
                 $aSearch->execute();
 
-                print "<div>";
+                print "<div class=\"results\">";
                 print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
@@ -114,94 +203,5 @@ report.php
     
 ?>
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Generate A Report</title>
-    <link rel='stylesheet' type='text/css' href='style.css'>
-
-    <!-- page specific styling -->
-    <style>
-        label{
-            display: inline-block;
-            text-align: center;
-        }
-        table {
-            border-collapse: collapse;
-            width: 70%;
-            margin-left: 15%;
-            margin-right: 15%;
-        }
-
-        tr:nth-child(even) {
-            background-color: #922040;
-        }
-
-        th, td {
-            text-align: center;
-        }
-
-        th {
-            color: white;
-            font-size: 30px;
-            text-transform: capitalize;
-        }
-
-        td {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-            color: white
-        }
-    </style>
-</head>
-<body>
-    <?php
-        require_once("header.php");
-    ?>
-
-    <div class="log">
-        <div class="createhead">
-            <h2>Generate a Report</h2>
-        </div>
-
-        <div class="forms">
-            <form method="post" action="report.php">
-                <label>Range start:<input type="date" name="dFrom" placeholder="MM/DD/YYYY" required autofocus></label>
-                <label>Range end:<input type="date" name="dTo" placeholder="MM/DD/YYYY" required></label>
-                <p>Package Pickup Status</p>
-                <select type="text" name="PUstatus">
-                    <option value="all">All</option>
-                    <option value="npu">Package Not Picked Up</option>
-                    <option value="pu">Package Picked Up</option>
-                </select>
-                
-                <div>
-                    <p>Which buildings would you like to include on the report?</p>
-                    <label>
-                        1
-                        <input type="checkbox" id="bldg1" name="bldg1" value="Building 1" checked>
-                    </label>                    
-                    <label>
-                        2
-                        <input type="checkbox" id="bldg2" name="bldg2" value="Building 2" checked>
-                    </label>                    
-                    <label>
-                        3
-                        <input type="checkbox" id="bldg3" name="bldg3" value="Building 3" checked>
-                    </label>
-                    <label>
-                        4
-                        <input type="checkbox" id="bldg4" name="bldg4" value="Building 4" checked>
-                    </label>
-                </div>
-                <br>
-                <input type="submit" value="Generate">
-                <input type="reset" value="Clear Form">
-            </form>
-            <div style="font-size:12px; color:red; margin-top:10px">
-                <?php if(isset($invalid)){echo $invalid;}?>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
