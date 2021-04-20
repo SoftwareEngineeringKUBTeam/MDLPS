@@ -73,7 +73,7 @@ report.php
 
             if (strtotime($dFrom) <= strtotime($dTo))  {
                 //query
-                $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo and :PU :bldg1");                
+                $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo :PU :bldg1");                
                 // prepared statement
                 $search = $conn->prepare($sql);
 
