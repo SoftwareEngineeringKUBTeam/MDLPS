@@ -94,11 +94,7 @@ report.php
                 <input type="submit" value="Generate">
                 <input type="reset" value="Clear Form">
             </form>
-            <div style="font-size:12px; color:red; margin-top:10px">
-                <?php if(isset($invalid)){echo $invalid;}?>
-            </div>
-        </div>
-    </div>
+            
 
 
 <?php
@@ -194,7 +190,7 @@ report.php
                 // do nada
             }
 
-            if (strtotime($dFrom) <= strtotime($dTo))  {
+            if ((strtotime($dFrom) <= strtotime($dTo)) || (strtotime($dfrom) > date("Y/m/d 00:00:00")))  {
                                 
                 // prepared statements
                 $search = $conn->prepare($sql);
@@ -219,7 +215,7 @@ report.php
                 print "</div>";
             }
             else {
-                $invalid = "Start date should be before end date.";
+                $invalid = "Invalid date input.";
             }
         } 
     }// END try
@@ -230,6 +226,10 @@ report.php
 
     
 ?>
-
+            <div style="font-size:12px; color:red; margin-top:10px">
+                <?php if(isset($invalid)){echo $invalid;}?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
