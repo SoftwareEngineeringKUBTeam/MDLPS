@@ -44,35 +44,24 @@ report.php
             else {
                 // do nada
             }
-/*
+
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
-                $sql .= " AND building=:bldg1";
-                $bldg1 = $_POST["bldg1"];                
+                $sql .= " AND building=" . $_POST["bldg1"];                
             }
-            else {
-                $bldg1 = "";
-            }
-            
             // building 2 set
             if (!empty($_POST["bldg2"])) {
-                $bldg2 = $_POST["bldg2"];
-                $sql .= " AND building=:bldg2";
-                $search->bindParam(":bldg2", $bldg2);
+                $sql .= " AND building=" . $_POST["bldg2"];                
             }
             // building 3 set
             if (!empty($_POST["bldg3"])) {
-                $bldg3 = $_POST["bldg3"];
-                $sql .= " AND building=:bldg3";
-                $search->bindParam(":bldg3", $bldg3);
+                $sql .= " AND building=" . $_POST["bldg3"];                
             }
             // building 4 set 
             if (!empty($_POST["bldg4"])) {
-                $bldg4 = $_POST["bldg4"];
-                $sql .= " AND building=:bldg4";
-                $search->bindParam(":bldg4", $bldg4);
-            } 
-*/            
+                $sql .= " AND building=" . $_POST["bldg4"];                
+            }
+            
             // if all buildings are unchecked, it should still search using all builidngs
 
             if (strtotime($dFrom) <= strtotime($dTo))  {
