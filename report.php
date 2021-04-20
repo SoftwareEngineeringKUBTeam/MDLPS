@@ -22,7 +22,8 @@ report.php
             $dTo = $_POST["dTo"] . " 23:59:59";
 
             //query
-            $sql = "SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo";            
+            $sql = "SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo";
+            $archive = "SELECT * FROM archive WHERE log_date BETWEEN :dFrom and :dTo";            
 
             /************************************************************************
             * parameters below are to narrow the database query.
@@ -33,10 +34,12 @@ report.php
             // package status: not picked up
             if ($_POST["PUstatus"] == "npu") {
                 $sql .= " AND sign_date IS NULL";
+                $archive .= " AND sign_date IS NULL";
             }
             // package status: picked up
             else if ($_POST["PUstatus"] == "pu") {
                 $sql .= " AND sign_date IS NOT NULL";
+                $archive .= " AND sign_date IS NOT NULL";
             }
             // just to close out the if/else statement.  intentionally blank
             // this will be the case if "All" is left selected as to not specify
@@ -48,43 +51,55 @@ report.php
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
                 $bldg1 = $_POST["bldg1"];
-                $sql .= " OR building=\"$bldg1\"";                
+                $sql .= " AND building=\"$bldg1\"";
+                $archive .= " AND building=\"$bldg1\"";                
             }
             // building 2 set
             if (!empty($_POST["bldg2"])) {
                 $bldg2 = $_POST["bldg2"];
-                $sql .= " OR building=\"$bldg2\"";                
+                $sql .= " AND building=\"$bldg2\"";  
+                $archive .= " AND building=\"$bldg2\"";              
             }
             // building 3 set
             if (!empty($_POST["bldg3"])) {
                 $bldg3 = $_POST["bldg3"];
-                $sql .= " OR building=\"$bldg3\"";                
+                $sql .= " AND building=\"$bldg3\"";
+                $archive .= " AND building=\"$bldg3\"";                
             }
             // building 4 set 
             if (!empty($_POST["bldg4"])) {
                 $bldg4 = $_POST["bldg4"];
-                $sql .= " OR building=\"$bldg4\"";                
+                $sql .= " AND building=\"$bldg4\"";
+                $archive .= " AND building=\"$bldg4\"";                 
             }
             
             // if all buildings are unchecked, it should still search using all builidngs
 
             if (strtotime($dFrom) <= strtotime($dTo))  {
                                 
-                // prepared statement
+                // prepared statements
                 $search = $conn->prepare($sql);
+                $aSearch = $conn->prepare($archive);
 
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
+
+                $aSearch->bindParam(':dFrom', $dFrom);
+                $aSearch->bindParam(":dTo", $dTo);
                 
                 //$search->bindParam(":bldg1", $bldg1);
 
-
                 $search->execute();
+                $aSearch->execute();
 
+                print "<div>";
                 print "<h3>Report: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
-                
+                print "<h3>Archived: </h3>";
+                $aReport = $search->fetchall(PDO::FETCH_ASSOC);
+                printTable($aReport);
+                print "</div>";
             }
             else {
                 $invalid = "Start date should be before end date.";
