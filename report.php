@@ -21,6 +21,9 @@ report.php
             $dFrom = $_POST["dFrom"] . " 00:00:00";
             $dTo = $_POST["dTo"] . " 23:59:59";
 
+            //query
+            $sql = "SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo";            
+
             /************************************************************************
             * parameters below are to narrow the database query.
             * by default, the page is set to search all packages within the date range.
@@ -28,29 +31,29 @@ report.php
             * the $sql variable to match user's parameters. 
             ***********************************************************************/
             // package status: not picked up
-            if ($_POST["PUstatus"] === "npu") {
-                $PU = " AND sign_date IS NULL";
+            if ($_POST["PUstatus"] == "npu") {
+                $sql .= " AND sign_date IS NULL";
             }
             // package status: picked up
-            else if ($_POST["PUstatus"] === "pu") {
-                $PU = " AND sign_date IS NOT NULL";
+            else if ($_POST["PUstatus"] == "pu") {
+                $sql .= " AND sign_date IS NOT NULL";
             }
             // just to close out the if/else statement.  intentionally blank
             // this will be the case if "All" is left selected as to not specify
             // whether the package was picked up or not
             else {
                 // do nada
-                $PU ="";
             }
-
+/*
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
-                $bldg1 = " AND building=" . $_POST["bldg1"];                
+                $sql .= " AND building=:bldg1";
+                $bldg1 = $_POST["bldg1"];                
             }
             else {
                 $bldg1 = "";
             }
-            /*
+            
             // building 2 set
             if (!empty($_POST["bldg2"])) {
                 $bldg2 = $_POST["bldg2"];
@@ -68,19 +71,19 @@ report.php
                 $bldg4 = $_POST["bldg4"];
                 $sql .= " AND building=:bldg4";
                 $search->bindParam(":bldg4", $bldg4);
-            } */
+            } 
+*/            
             // if all buildings are unchecked, it should still search using all builidngs
 
             if (strtotime($dFrom) <= strtotime($dTo))  {
-                //query
-                $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo :PU :bldg1");                
+                                
                 // prepared statement
                 $search = $conn->prepare($sql);
 
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
-                $search->bindParam(":PU", $PU);
-                $search->bindParam(":bldg1", $bldg1);
+                
+                //$search->bindParam(":bldg1", $bldg1);
 
 
                 $search->execute();
