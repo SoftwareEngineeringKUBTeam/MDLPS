@@ -48,22 +48,22 @@ report.php
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
                 $bldg1 = $_POST["bldg1"];
-                $sql .= " AND building=\"$bldg1\"";                
+                $sql .= " OR building=\"$bldg1\"";                
             }
             // building 2 set
             if (!empty($_POST["bldg2"])) {
                 $bldg2 = $_POST["bldg2"];
-                $sql .= " AND building=\"$bldg2\"";                
+                $sql .= " OR building=\"$bldg2\"";                
             }
             // building 3 set
             if (!empty($_POST["bldg3"])) {
                 $bldg3 = $_POST["bldg3"];
-                $sql .= " AND building=\"$bldg3\"";                
+                $sql .= " OR building=\"$bldg3\"";                
             }
             // building 4 set 
             if (!empty($_POST["bldg4"])) {
                 $bldg4 = $_POST["bldg4"];
-                $sql .= " AND building=\"$bldg4\"";                
+                $sql .= " OR building=\"$bldg4\"";                
             }
             
             // if all buildings are unchecked, it should still search using all builidngs
