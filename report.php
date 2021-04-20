@@ -115,8 +115,8 @@ report.php
             $dTo = $_POST["dTo"] . " 23:59:59";
 
             //query
-            $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom and :dTo) and (:param)";
-            $archive = "SELECT * FROM archive WHERE (log_date BETWEEN :dFrom and :dTo) and (:param)";            
+            $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom and :dTo) and ( :params )";
+            $archive = "SELECT * FROM archive WHERE (log_date BETWEEN :dFrom and :dTo) and ( :params )";            
 
             /************************************************************************
             * parameters below are to narrow the database query.
@@ -142,12 +142,12 @@ report.php
             }
 
             // used for querying database
-            $param = "building IS NOT NULL";
+            $params = "building IS NOT NULL";
             $bldgs = 0;
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
                 $bldg1 = $_POST["bldg1"];
-                $param = "building=\"$bldg1\"";
+                $params = "building=\"$bldg1\"";
                 $bldgs +=1;
                                
             }
@@ -155,11 +155,11 @@ report.php
             if (!empty($_POST["bldg2"])) {
                 $bldg2 = $_POST["bldg2"];
                 if ($bldgs == 0) {
-                    $param = "building=\"$bldg2\"";
+                    $params = "building=\"$bldg2\"";
                     $bldgs += 1;  
                 }
                 else {
-                    $param .= " OR building=\"$bldg2\"";
+                    $params .= " OR building=\"$bldg2\"";
                     $bldgs += 1;
                 }             
             }
@@ -167,11 +167,11 @@ report.php
             if (!empty($_POST["bldg3"])) {
                 $bldg3 = $_POST["bldg3"];
                 if ($bldgs == 0) {
-                    $param = "building=\"$bldg3\"";  
+                    $params = "building=\"$bldg3\"";  
                     $bldgs +=1;
                 }
                 else {
-                    $param .= " OR building=\"$bldg3\"";
+                    $params .= " OR building=\"$bldg3\"";
                     $bldgs+=1;
                 }                
             }
@@ -179,11 +179,11 @@ report.php
             if (!empty($_POST["bldg4"])) {
                 $bldg4 = $_POST["bldg4"];
                 if ($bldgs == 0) {
-                    $param = "building=\"$bldg4\"";  
+                    $params = "building=\"$bldg4\"";  
                     $bldgs +=1;
                 }
                 else {
-                    $param .= " OR building=\"$bldg4\"";
+                    $params .= " OR building=\"$bldg4\"";
                     $bldgs +=1;
                 }                  
             }
@@ -198,11 +198,11 @@ report.php
 
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
-                $search->bindParam(":param", $param);
+                $search->bindParam(":params", $params);
 
                 $aSearch->bindParam(':dFrom', $dFrom);
                 $aSearch->bindParam(":dTo", $dTo);
-                $aSearch->bindParam(":param", $param);
+                $aSearch->bindParam(":params", $params);
                 
                 //$search->bindParam(":bldg1", $bldg1);
 
