@@ -148,16 +148,19 @@ report.php
             if (!empty($_POST["bldg1"])) {
                 $bldg1 = $_POST["bldg1"];
                 $param = "building=\"$bldg1\"";
+                $bldgs +=1;
                                
             }
             // building 2 set
             if (!empty($_POST["bldg2"])) {
                 $bldg2 = $_POST["bldg2"];
                 if ($bldgs == 0) {
-                    $param = "building=\"$bldg2\"";  
+                    $param = "building=\"$bldg2\"";
+                    $bldgs += 1;  
                 }
                 else {
                     $param .= " OR building=\"$bldg2\"";
+                    $bldgs += 1;
                 }             
             }
             // building 3 set
@@ -165,9 +168,11 @@ report.php
                 $bldg3 = $_POST["bldg3"];
                 if ($bldgs == 0) {
                     $param = "building=\"$bldg3\"";  
+                    $bldgs +=1;
                 }
                 else {
                     $param .= " OR building=\"$bldg3\"";
+                    $bldgs+=1;
                 }                
             }
             // building 4 set 
@@ -175,9 +180,11 @@ report.php
                 $bldg4 = $_POST["bldg4"];
                 if ($bldgs == 0) {
                     $param = "building=\"$bldg4\"";  
+                    $bldgs +=1;
                 }
                 else {
                     $param .= " OR building=\"$bldg4\"";
+                    $bldgs +=1;
                 }                  
             }
             
