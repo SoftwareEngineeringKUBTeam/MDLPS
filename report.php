@@ -24,8 +24,7 @@ report.php
             if (strtotime($dFrom) <= strtotime($dTo))  {
                 //query
                 $sql = ("SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo");
-                // prepared statement
-                $search = $conn->prepare($sql);
+                
 
                 /************************************************************************
                  * parameters below are to narrow the database query.
@@ -73,6 +72,9 @@ report.php
                     $search->bindParam(":bldg4", $bldg4);
                 }
                 // if all buildings are unchecked, it should still search using all builidngs
+                
+                // prepared statement
+                $search = $conn->prepare($sql);
                 
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
