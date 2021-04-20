@@ -115,8 +115,8 @@ report.php
             $dTo = $_POST["dTo"] . " 23:59:59";
 
             //query
-            $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom and :dTo) and ( :params )";
-            $archive = "SELECT * FROM archive WHERE (log_date BETWEEN :dFrom and :dTo) and ( :params )";            
+            $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";
+            $archive = "SELECT * FROM archive WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";            
 
             /************************************************************************
             * parameters below are to narrow the database query.
@@ -124,22 +124,7 @@ report.php
             * if the user changes the search parameters, the statements below will mutate
             * the $sql variable to match user's parameters. 
             ***********************************************************************/
-            // package status: not picked up
-            if ($_POST["PUstatus"] == "npu") {
-                $sql .= " AND sign_date IS NULL";
-                $archive .= " AND sign_date IS NULL";
-            }
-            // package status: picked up
-            else if ($_POST["PUstatus"] == "pu") {
-                $sql .= " AND sign_date IS NOT NULL";
-                $archive .= " AND sign_date IS NOT NULL";
-            }
-            // just to close out the if/else statement.  intentionally blank
-            // this will be the case if "All" is left selected as to not specify
-            // whether the package was picked up or not
-            else {
-                // do nada
-            }
+            
 
             // used for querying database
             $params = "building IS NOT NULL";
@@ -186,9 +171,28 @@ report.php
                     $params .= " OR building=\"$bldg4\"";
                     $bldgs +=1;
                 }                  
-            }
-            
+            }            
             // if all buildings are unchecked, it should still search using all builidngs
+            
+            $sql .= $params . ")";
+            $archive .= $params .")";
+            
+            // package status: not picked up
+            if ($_POST["PUstatus"] == "npu") {
+                $sql .= " AND sign_date IS NULL";
+                $archive .= " AND sign_date IS NULL";
+            }
+            // package status: picked up
+            else if ($_POST["PUstatus"] == "pu") {
+                $sql .= " AND sign_date IS NOT NULL";
+                $archive .= " AND sign_date IS NOT NULL";
+            }
+            // just to close out the if/else statement.  intentionally blank
+            // this will be the case if "All" is left selected as to not specify
+            // whether the package was picked up or not
+            else {
+                // do nada
+            }
 
             if (strtotime($dFrom) <= strtotime($dTo))  {
                                 
@@ -198,18 +202,14 @@ report.php
 
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
-                $search->bindParam(":params", $params);
 
                 $aSearch->bindParam(':dFrom', $dFrom);
-                $aSearch->bindParam(":dTo", $dTo);
-                $aSearch->bindParam(":params", $params);
+                $aSearch->bindParam(":dTo", $dTo);                
 
                 $search->execute();
                 $aSearch->execute();
 
                 print "<div class=\"results\">";
-                print $sql;
-                print $params;
                 print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
