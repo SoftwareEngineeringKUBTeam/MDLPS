@@ -210,6 +210,7 @@ report.php
                 $aSearch->execute();
 
                 print "<div class=\"results\">";
+                print $sql;
                 print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
