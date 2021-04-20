@@ -115,8 +115,8 @@ report.php
             $dTo = $_POST["dTo"] . " 23:59:59";
 
             //query
-            $sql = "SELECT * FROM package WHERE log_date BETWEEN :dFrom and :dTo";
-            $archive = "SELECT * FROM archive WHERE log_date BETWEEN :dFrom and :dTo";            
+            $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom and :dTo) and (:params)";
+            $archive = "SELECT * FROM archive WHERE (log_date BETWEEN :dFrom and :dTo) and (:params)";            
 
             /************************************************************************
             * parameters below are to narrow the database query.
@@ -141,29 +141,44 @@ report.php
                 // do nada
             }
 
+            // used for querying database
+            $param = "building IS NOT NULL";
+            $bldgs = 0;
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
                 $bldg1 = $_POST["bldg1"];
-                $sql .= " AND building=\"$bldg1\"";
-                $archive .= " AND building=\"$bldg1\"";                
+                $param = "building=\"$bldg1\"";
+                               
             }
             // building 2 set
             if (!empty($_POST["bldg2"])) {
                 $bldg2 = $_POST["bldg2"];
-                $sql .= " AND building=\"$bldg2\"";  
-                $archive .= " AND building=\"$bldg2\"";              
+                if ($bldgs == 0) {
+                    $param = "building=\"$bldg2\"";  
+                }
+                else {
+                    $param .= " OR building=\"$bldg2\"";
+                }             
             }
             // building 3 set
             if (!empty($_POST["bldg3"])) {
                 $bldg3 = $_POST["bldg3"];
-                $sql .= " AND building=\"$bldg3\"";
-                $archive .= " AND building=\"$bldg3\"";                
+                if ($bldgs == 0) {
+                    $param = "building=\"$bldg3\"";  
+                }
+                else {
+                    $param .= " OR building=\"$bldg3\"";
+                }                
             }
             // building 4 set 
             if (!empty($_POST["bldg4"])) {
                 $bldg4 = $_POST["bldg4"];
-                $sql .= " AND building=\"$bldg4\"";
-                $archive .= " AND building=\"$bldg4\"";                 
+                if ($bldgs == 0) {
+                    $param = "building=\"$bldg4\"";  
+                }
+                else {
+                    $param .= " OR building=\"$bldg4\"";
+                }                  
             }
             
             // if all buildings are unchecked, it should still search using all builidngs
@@ -190,7 +205,7 @@ report.php
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
                 print "<h3>Archived: </h3>";
-                $aReport = $search->fetchall(PDO::FETCH_ASSOC);
+                $aReport = $aSearch->fetchall(PDO::FETCH_ASSOC);
                 printTable($aReport);
                 print "</div>";
             }
