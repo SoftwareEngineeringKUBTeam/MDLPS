@@ -108,7 +108,7 @@ report.php
 
         if(isset($_POST["dFrom"]) && isset($_POST["dTo"])) {
             $dFrom = $_POST["dFrom"] . " 00:00:00";
-            $dTo = $_POST["dTo"];
+            $dTo = $_POST["dTo"] . " 00:00:00";
 
             //query
             $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";
@@ -190,7 +190,7 @@ report.php
                 // do nada
             }
 
-            if ((strtotime($dFrom) <= strtotime($dTo)) && (new DateTime() >= new DateTime(strtotime($dTo))))  {
+            if (strtotime($dFrom) <= strtotime($dTo))  {
                                 
                 // prepared statements
                 $search = $conn->prepare($sql);
