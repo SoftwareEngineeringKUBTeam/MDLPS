@@ -191,9 +191,11 @@ report.php
 
                 $search->bindParam(':dFrom', $dFrom);
                 $search->bindParam(":dTo", $dTo);
+                $search->bindParam(":param", $param);
 
                 $aSearch->bindParam(':dFrom', $dFrom);
                 $aSearch->bindParam(":dTo", $dTo);
+                $aSearch->bindParam(":param", $param);
                 
                 //$search->bindParam(":bldg1", $bldg1);
 
