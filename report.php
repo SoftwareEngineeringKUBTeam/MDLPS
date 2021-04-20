@@ -28,11 +28,11 @@ report.php
             * the $sql variable to match user's parameters. 
             ***********************************************************************/
             // package status: not picked up
-            if ($_POST["PUstatus"] == "nPU") {
+            if ($_POST["PUstatus"] == "npu") {
                 $PU = " AND sign_date IS NULL";
             }
             // package status: picked up
-            else if ($_POST["PUstatus"] == "PU") {
+            else if ($_POST["PUstatus"] == "pu") {
                 $PU = " AND sign_date IS NOT NULL";
             }
             // just to close out the if/else statement.  intentionally blank
