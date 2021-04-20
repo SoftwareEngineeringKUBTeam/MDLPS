@@ -47,19 +47,19 @@ report.php
 
             // builidng 1 set
             if (!empty($_POST["bldg1"])) {
-                $sql .= " AND building='$_POST["bldg1"]'";                
+                $sql .= " AND building=\'$_POST["bldg1"]\'";                
             }
             // building 2 set
             if (!empty($_POST["bldg2"])) {
-                $sql .= " AND building='$_POST["bldg2"]'";                
+                $sql .= " AND building=\'$_POST["bldg2"]\'";                
             }
             // building 3 set
             if (!empty($_POST["bldg3"])) {
-                $sql .= " AND building='$_POST["bldg3"]'";                
+                $sql .= " AND building=\'$_POST["bldg3"]\'";                
             }
             // building 4 set 
             if (!empty($_POST["bldg4"])) {
-                $sql .= " AND building='$_POST["bldg4"]'";                
+                $sql .= " AND building=\'$_POST["bldg4"]\'";                
             }
             
             // if all buildings are unchecked, it should still search using all builidngs
