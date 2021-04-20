@@ -93,7 +93,7 @@ report.php
                 $aSearch->execute();
 
                 print "<div>";
-                print "<h3>Report: </h3>";
+                print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
                 print "<h3>Archived: </h3>";
@@ -125,6 +125,32 @@ report.php
         label{
             display: inline-block;
             text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        tr:nth-child(even) {
+            background-color: #922040;
+        }
+
+        th, td {
+            text-align: center;
+        }
+
+        th {
+            color: white;
+            font-size: 30px;
+            text-transform: capitalize;
+        }
+
+        td {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            color: white
         }
     </style>
 </head>
