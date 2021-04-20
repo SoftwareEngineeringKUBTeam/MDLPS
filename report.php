@@ -190,7 +190,7 @@ report.php
                 // do nada
             }
 
-            if ((strtotime($dFrom) <= strtotime($dTo)) && (new DateTime() > strtotime($dTo)))  {
+            if ((strtotime($dFrom) <= strtotime($dTo)) && (new DateTime() >= strtotime($dTo)))  {
                                 
                 // prepared statements
                 $search = $conn->prepare($sql);
