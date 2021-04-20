@@ -203,14 +203,13 @@ report.php
                 $aSearch->bindParam(':dFrom', $dFrom);
                 $aSearch->bindParam(":dTo", $dTo);
                 $aSearch->bindParam(":params", $params);
-                
-                //$search->bindParam(":bldg1", $bldg1);
 
                 $search->execute();
                 $aSearch->execute();
 
                 print "<div class=\"results\">";
-                print $search;
+                print $sql;
+                print $params;
                 print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
