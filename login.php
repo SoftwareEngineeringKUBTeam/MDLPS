@@ -28,7 +28,7 @@ try {
 
     //check if database is connected
     if(!$conn) {
-        die("error: couldn't connect to database" . mysqli_connect_error());
+        die("error: couldn't connect to database");
     }
     
     if(isset($_POST["username"]) && isset($_POST["password"])) {
