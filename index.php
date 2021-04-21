@@ -7,7 +7,6 @@ MDLPS main page-->
 
 <!-- check if user is logged in, if not, redirect to login page -->
 <?php
-    session_start();
     include("functions.php");
     checkLogin();
 ?>

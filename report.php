@@ -6,7 +6,6 @@ report.php
 
 <!-- check if user is logged in, if not, redirect to login page -->
 <?php
-    session_start();
     include("functions.php");
     checkLogin();
 ?>
@@ -209,12 +208,13 @@ report.php
                 print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
-				$reportString = serialize($report);
                 print "<h3>Archived: </h3>";
                 $aReport = $aSearch->fetchall(PDO::FETCH_ASSOC);
                 printTable($aReport);
+				
+				$rString = json_encode($report);
 				print "<form action='download.php' method='POST'>";
-				print "<input type='hidden' name='report' value=$reportString>";
+				print "<input type='hidden' name='report' value='$rString'>";
 				print "<input type='submit' value='Download'>";
 				print "</form>";
                 print "</div>";
