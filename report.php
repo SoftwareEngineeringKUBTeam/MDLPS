@@ -213,7 +213,7 @@ report.php
                 $aReport = $aSearch->fetchall(PDO::FETCH_ASSOC);
                 printTable($aReport);
 				print "<form action='download.php' method='POST'>";
-				print "<input hidden='true' name='report' value = $report>";
+				print "<input type='hidden' name='report' value = $report>";
 				print "<input type='submit' value='Download'>";
 				print "</form>";
                 print "</div>";
