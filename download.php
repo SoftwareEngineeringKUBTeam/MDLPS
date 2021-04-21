@@ -1,4 +1,5 @@
 <?php
+/*
 header('Content-Type: application/csv');
 header('Content-Disposition: attachment; filename="report.csv"');
 
@@ -19,5 +20,6 @@ foreach ($report as $line) {
 //Clean up file and close
 fclose($file);
 ob_flush();
-exit();
+*/
+print_r($_POST['report']);
 ?>
