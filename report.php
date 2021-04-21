@@ -213,6 +213,10 @@ report.php
                 $aReport = $aSearch->fetchall(PDO::FETCH_ASSOC);
                 printTable($aReport);
                 print "</div>";
+				print "<form action='download.php' method='POST'>";
+				print "<input name='report' value = $report">;
+				print "<input type='submit' value='Download'>";
+				print "</form>";
             }
             else {
                 $invalid = "Invalid date input.";
