@@ -19,6 +19,5 @@ foreach ($report as $line) {
 //Clean up file and close
 fclose($file);
 ob_flush();
-header("refresh:10;url=report.php");
 exit();
 ?>
