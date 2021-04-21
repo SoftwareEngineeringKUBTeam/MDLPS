@@ -21,7 +21,6 @@ foreach ($report as $line) {
 fclose($file);
 ob_flush();
 */
-echo "<pre>";
-print_r($_POST['report']);
-echo "</pre>";
+include("functions.php");
+printTable($_POST["report"]);
 ?>
