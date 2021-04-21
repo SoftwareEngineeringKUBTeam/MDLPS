@@ -53,6 +53,9 @@ report.php
 <body>
 
 <?php
+	if (ISSET($_POST['Download'])){
+		
+	}
     require_once("header.php");
 ?>
 <div class="log">
@@ -209,11 +212,12 @@ report.php
                 print "<h3>This Year: </h3>";
                 $report = $search->fetchall(PDO::FETCH_ASSOC);
                 printTable($report);
+				$reportString = serialize($report);
                 print "<h3>Archived: </h3>";
                 $aReport = $aSearch->fetchall(PDO::FETCH_ASSOC);
                 printTable($aReport);
 				print "<form action='download.php' method='POST'>";
-				print "<input type='hidden' name='report' value = $report>";
+				print "<input type='hidden' name='report' value=$reportString">;
 				print "<input type='submit' value='Download'>";
 				print "</form>";
                 print "</div>";
