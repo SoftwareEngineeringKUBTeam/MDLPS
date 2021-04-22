@@ -77,7 +77,36 @@ function printPackageTable($data) {
     print "</table>";
 }
 
-
+/* Function Name: printFormTable
+ * Author: Phillip Corley
+ * Description: prints table from sql database with form for checkbox
+ * Parameters: (array) $data: array of items from the sql database
+ */
+function printUserEditTable($data) {
+    if (count($data) === 0) {
+        return;
+    }
+    $header = array_keys($data[0]);
+    print "<table class=\"user-table\">\n";
+    print "<tr>";
+    print "<th>Select</th>";
+    foreach ($header as $h) {
+        print "<th>$h</th>";
+    }
+    print "</tr>\n";
+    foreach ($data as $record) {
+        $values = array_values($record);
+        $form_value = implode(',', $values);
+        $value_arr = explode(',', $form_value);
+        print "<tr>";
+        print "<td><input type=\"radio\" name=\"rows\" value=$value_arr[0]></td>";
+        foreach ($values as $v) {
+            print "<td>$v</td>";
+        }
+        print "</tr>\n";
+    }
+    print "</table>";
+}
 
 
 /* Function Name:   dbConnect
