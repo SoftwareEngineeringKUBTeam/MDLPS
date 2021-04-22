@@ -8,7 +8,6 @@ ChangePassword.php -->
 
 <?php
 	
-    session_start();
     include("functions.php");
     checkLogin();
     if (ISSET($_POST["oldPassword"])&& ISSET($_POST["newPassword"])){

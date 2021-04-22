@@ -5,6 +5,7 @@ Last Modified: 3/30/2021 - created administrator page to create users
 createuser.php
 MDLPS search page-->
 
+
 <!-- check if user is logged in, if not, redirect to login page -->
 <?php
     session_start();
