@@ -21,7 +21,7 @@ Header file for top of each page.-->
 					<div class=\"dropdown-content\">
 						<a href=\"createuser.php\">Create User</a>
 						<a href=\"edituser.php\">Edit User</a>
-						<a href=\"deluser.php\">Delete User</a>
+						<a href=\"deleteuser.php\">Delete User</a>
 					</div>
 				  </div>";
 		}

@@ -30,27 +30,15 @@ MDLPS edit user page-->
 <?php //include header 
 require_once("header.php");
 ?>
-<div class="edit user">
+<div class="delete user">
         <!-- Log section's header -->
     <div class="createhead">
-        <h2>Edit User</h2>
+        <h2>Delete User</h2>
     </div>
         <!-- Container for styling forms -->
         <div class="log">
-            <form method="post" action="edituserdb.php">
-				<label>Change:
-					<select name="category">
-						<option selected value="user">Employee Username</option>
-						<option value="accessLevel">Access Level</option>
-						<option value="nameFirst">First Name</option>
-						<option value="nameLast">Last Name</option>
-					</select>
-				</label>
-				<p>
-					<label>To:<input type="text" name="term" required></label>
-					<input type="submit" value ="Edit">
-				</p>
-
+            <form method="post" action="deleteuserdb.php">
+					
 				<?php 
 
 				$conn = dbConnect();
@@ -62,6 +50,7 @@ require_once("header.php");
 				printUserEditTable($records);
 
 				?>
+				<input type="submit" value="Delete">
 			</form>
 		</div>
 	</div>
