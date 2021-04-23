@@ -15,7 +15,15 @@ Header file for top of each page.-->
 		<?php
 		$userinfo = $_SESSION["userInfo"];
 		if ($userinfo["accessLevel"] === "SYSADMIN"){
-			echo "<li><a href=\"admin.php\">Administrator</a></li>";
+			
+			echo "<div class=\"dropdown\">
+					<button class=\"dropbtn\">Administrator</button>
+					<div class=\"dropdown-content\">
+						<a href=\"createuser.php\">Create User</a>
+						<a href=\"edituser.php\">Edit User</a>
+						<a href=\"deleteuser.php\">Delete User</a>
+					</div>
+				  </div>";
 		}
 		?>
     </ul>
