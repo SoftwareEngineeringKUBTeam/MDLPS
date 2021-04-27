@@ -18,6 +18,7 @@ ChangePassword.php -->
      $check = "SELECT * from logininfo WHERE user=:user";
      $search = $conn->prepare($check);     
      $search->bindParam(':user', $_SESSION['loggedin']);
+     $search->execute();
      $result = $search->fetch(PDO::FETCH_ASSOC);
      $oldhash = $result["pass"];
 
