@@ -110,8 +110,8 @@ report.php
             $dTo = $_POST["dTo"] . " 00:00:00";
 
             //query
-            $sql = "SELECT * FROM package WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";
-            $archive = "SELECT * FROM archive WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";            
+            $sql = "SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";
+            $archive = "SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM archive WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";            
 
             /************************************************************************
             * parameters below are to narrow the database query.

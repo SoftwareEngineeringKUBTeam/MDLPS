@@ -122,7 +122,7 @@ if (isset($_POST['package_ID']))
     if(ISSET($_POST["verify"]) && ISSET($_POST["post_ID"]))
     {
         $conn = dbConnect();
-		$stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
+		$stmt = $conn->prepare("SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE ID = :pid");
 		$stmt->bindParam(":pid", $_POST["post_ID"]);
 		$stmt->execute();
         $log = $stmt->fetch();
@@ -131,7 +131,7 @@ if (isset($_POST['package_ID']))
         {
 		    //Verification
             $conn = dbConnect();
-		    $stmt = $conn->prepare("SELECT * FROM package WHERE ID = :pid");
+		    $stmt = $conn->prepare("SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE ID = :pid");
 		    $stmt->bindParam(":pid", $_POST["post_ID"]);
 		    $stmt->execute();
 		    $log = $stmt->fetch();
@@ -173,7 +173,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'building') && isset($_GET
 {
     
     //Prepared statement
-    $select = "SELECT * FROM package WHERE building = :term";
+    $select = "SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE building = :term";
     $stmt = $conn->prepare($select);
     
     //Parameter Binding
@@ -202,7 +202,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
     list($name_first, $name_last) = explode(' ', $term);
 
     //Prepared statement
-    $select = "SELECT * FROM package WHERE `name_first` = :name_first AND `name_last` = :name_last";
+    $select = "SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE `name_first` = :name_first AND `name_last` = :name_last";
     $stmt = $conn->prepare($select);
 
     //Parameter Binding
@@ -227,7 +227,7 @@ if (isset($_GET['category']) && ($_GET['category'] == 'Student Name') && isset($
 if (isset($_GET['category']) && ($_GET['category'] == 'tracking_ID') && isset($_GET['term'])) {
 
     //Prepared statement
-    $select = "SELECT * FROM package WHERE `tracking_ID` = :term";
+    $select = "SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE `tracking_ID` = :term";
     $stmt = $conn->prepare($select);
         
     //Parameter Binding
