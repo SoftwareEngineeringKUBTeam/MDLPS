@@ -22,7 +22,7 @@ ChangePassword.php -->
      $oldhash = $result["pass"];
 
      // make sure old password input by user matches password in DB
-     if (password_verify($oldPassword, $oldhash)) {
+     if (!password_verify($oldPassword, $oldhash)) {
          $invalid = "Old password must match your current password";
      }
     
