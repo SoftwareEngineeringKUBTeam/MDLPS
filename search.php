@@ -141,6 +141,7 @@ if (isset($_POST['package_ID']))
             //if verification successful, set the check-out date accordingly, and clear the saved post_ID
             if($input_code == $verified)
             {
+				date_default_timezone_set('America/New_York');
                 $date = date('Y-m-d H:i:s');
                 print"<h4>Verification Successful. Package has been Checked-Out</h4>";
                 $query = "UPDATE package SET sign_date = :sdate WHERE ID = :pid";
