@@ -37,6 +37,7 @@ ChangePassword.php -->
         $stmt->bindParam(":user", $_SESSION['loggedin']);
         $stmt->bindParam(":pass", $newhash);
         $stmt-> execute();
+        $invalid = "";
      }
     }
 ?>
