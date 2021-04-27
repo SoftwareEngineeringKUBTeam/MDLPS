@@ -11,15 +11,28 @@ ChangePassword.php -->
     include("functions.php");
     checkLogin();
     if (ISSET($_POST["oldPassword"])&& ISSET($_POST["newPassword"]) && ISSET($_POST["verifyPassword"])){
-     
-     if ($_POST["newPassword"] != $_POST["verifyPassword"]) {
+     $oldPassword = $_POST["oldPassword"];
+     $newhash = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+
+     $conn = dbConnect();
+     $check = "SELECT * from logininfo WHERE user=:user";
+     $search = $conn->prepare($check);     
+     $search->bindParam(':user', $_SESSION['loggedin']);
+     $result = $search->fetch(PDO::FETCH_ASSOC);
+     $oldhash = $result["pass"];
+
+     // make sure old password input by user matches password in DB
+     if (password_verify($oldPassword, $oldhash)) {
+         $invalid = "Old password must match your current password";
+     }
+    
+     // new passwords don't match
+     else if ($_POST["newPassword"] != $_POST["verifyPassword"]) {
          $invalid = "Passwords must match";
      }
+     // password checks pass, update the password
      else {
-        $conn = dbConnect();
-        $query = "UPDATE logininfo SET pass = :pass WHERE user = :user";
-        $oldhash = password_hash($_POST['oldPassword'], PASSWORD_DEFAULT);
-        $newhash = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+        $query = "UPDATE logininfo SET pass = :pass WHERE user = :user";        
         $stmt = $conn -> prepare($query);
         $stmt->bindParam(":user", $_SESSION['loggedin']);
         $stmt->bindParam(":pass", $newhash);
