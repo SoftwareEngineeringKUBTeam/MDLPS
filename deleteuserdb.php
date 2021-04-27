@@ -3,7 +3,7 @@
 require_once("functions.php"); // used to access notifyStudent function
 
 //require user to be logged in before using this
-session_start();
+checkLogin();
 	
 
 
