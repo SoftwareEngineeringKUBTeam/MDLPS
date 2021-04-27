@@ -38,7 +38,7 @@ try{
   if ($search->rowCount() == 1) {
 	// get email from search query
 	$email = $return[0]['email'];
-
+	date_default_timezone_set('America/New_York');
 	$date = date('Y-m-d H:i:s');
     // Generate 8 character 2FA code from current timestamp
     $hash = verify2fa($date, $_POST['trackingID']);
