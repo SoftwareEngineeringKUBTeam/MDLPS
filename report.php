@@ -107,7 +107,7 @@ report.php
 
         if(isset($_POST["dFrom"]) && isset($_POST["dTo"])) {
             $dFrom = $_POST["dFrom"] . " 00:00:00";
-            $dTo = $_POST["dTo"] . " 00:00:00";
+            $dTo = $_POST["dTo"] . " 23:59:59";
 
             //query
             $sql = "SELECT ID, building, log_date, name_first, name_last, tracking_ID, sign_date FROM package WHERE (log_date BETWEEN :dFrom AND :dTo) AND (";
